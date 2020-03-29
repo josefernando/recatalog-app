@@ -1,0 +1,54 @@
+
+/* Style to change separator  */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+    
+.clickable {
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.width-100 {
+    width: 100%;
+    background-color: #ffffff;
+    color: gray;
+}
+
+.font-main-menu {
+    font-weight: lighter ;
+}
+
+.endPoint {
+    display: none;
+}
+
+.table-code {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 200px;
+/*    box-shadow: 0 0 20px rgba(0,0,0,0.15); */
+    padding-right: 15px;
+    vertical-align: middle
+}
+
+.table-code tbody tr:nth-of-type(even)  {
+    background-color: #f3f3f3;
+}
+
+.table-code-row {
+    font-family: monospace;
+    font-size: 1.0em;
+}
+
+.table-code-row-col-num {
+    padding-left: 5px;
+    padding-right: 5px;
+} 
+
+div#accordion a {
+    transition: font-size 1s;
+}

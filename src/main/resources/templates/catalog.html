@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- meta UTF-8 não funcional se dentro do fragment -->
+	<meta charset="UTF-8">
+	<div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+
+	<div th:insert="fragments/header :: topMenu"></div>
+
+    <div id="accordionCatalog">
+        <div class="container actionForm accordion" id="newCatalog">
+            <a  class="nav-link" href="#toggleNewCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleNewCatalog">Adicionar Catálogo</a>
+            <div id="toggleNewCatalog" class="collapse" data-parent="#accordionCatalog"> <!--class="collapse show"-->
+                <form id="addCatForm" action="localhost:9080/arcatalog/catalogs" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
+                    <div class="form-group">
+                        <label for="catalogName">Nome do Catálogo</label>
+                        <input type="text" name="catName" class="form-control form-control-sm inputForm pathParam rounded-0" autocomplete="off">
+                            <!--required pattern="[^\s]+"-->
+                    </div>
+                    <div class="form-group">
+                            <label for="description">Descrição</label>
+                            <input class="form-control form-control-sm inputForm  pathParam rounded-0" type="text" name="desc" autocomplete="off">
+                            <!--   required pattern="[^\s]+"--> 
+                    </div>
+                    <div class="form-group">
+                        <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Add Catalog"  onclick="actionPostCatalog('addCatForm','catalogs')"/>
+                    </div>
+                    <div class="form-group">
+                            <button class="form-control form-control-sm btn-primary btn-submit">Adicionar</button>
+                    </div>
+
+                    <div>
+                        <input type="text" name="endPoint" value="catalogs/{catName}/catalog" class="endPoint">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <hr class="my-0" >
+
+        <div class="container actionForm " id="listAllCatalog">
+            <a  id="listAllCatalogLink" class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a>
+            <div id="toggleListAllCatalog" class="collapse" data-parent="#accordionCatalog">            
+                <table class="table table-hover table-sm">
+                    <thead id="headerListAllCatalog">
+                    <tr>
+                        <th class="pb-0">Name</th>
+                        <th class="pb-0">Type</th>
+                        <th class="pb-0">Description</th>
+                        <th class="pb-0">Data De Criação</th>
+                    </tr>
+                    </thead>
+                    <tbody id="bodyListAllCatalog">
+                    <tr class="clickable">
+                        <td class="pb-0"><i class="fas fa-book" aria-hidden="true">&nbsp;</i>CAMBIO</td>
+                        <td class="pb-0">Catalog</td>
+                        <td class="pb-0">Catálogo de Câmbio</td>
+                        <td class="pb-0">2019-08-15 08:30:17:904</td>
+                    </tr>
+                    <tr class="clickable">
+                        <td class="pb-0"><i class="fas fa-book" aria-hidden="true">&nbsp;</i>SEGUROS</td>
+                        <td class="pb-0">Catalog</td>
+                        <td class="pb-0">Catálogo de Seguros</td>
+                        <td class="pb-0">2019-08-16 08:30:17:904</td>
+                    </tr>   
+                    <tr class="clickable">
+                            <td class="pb-0"><i class="fas fa-book" aria-hidden="true">&nbsp;</i>FINANCEIRO</td>
+                            <td class="pb-0">Catalog</td>
+                            <td class="pb-0">Catálogo do Financeiro</td>
+                            <td class="pb-0">2019-08-16 08:30:17:904</td>
+                    </tr> 
+                    <tr class="clickable">
+                            <td class="pb-0"><i class="fas fa-book" aria-hidden="true">&nbsp;</i>ADMINISTRATIVO</td>
+                            <td class="pb-0">Catalog</td>
+                            <td class="pb-0">Catálogo do Administrativo</td>
+                            <td class="pb-0">2019-08-16 08:30:17:904</td>
+                    </tr>                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+<div th:insert="fragments/footer :: footerScript"></div>
+
+</body>
+</html>

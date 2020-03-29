@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- meta UTF-8 não funcional se dentro do fragment -->
+	<meta charset="UTF-8">
+	<div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+
+	<div th:insert="fragments/header :: topMenu"></div>
+    
+    <div id="accordionProject">
+        <div class="container actionForm accordion" id="cadProjet">
+            <a  class="nav-link" href="#toggleCadProject" data-toggle="collapse" aria-expanded="false" data-target="#toggleCadProject">Cadastrar Projeto</a>
+            <div id="toggleCadProject" class="collapse " data-parent="#accordionProject">
+                <form  id="cadProjForm" action="localhost:xxx/arcatalog/catalogs" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
+                    <p class="small text-center">Novo Projeto</p>
+                    <div class="form-group">
+                        <!--IMPORTANTE USE selectpicker plugin v1.13.9 , funciona com boostrap 4-->
+                        <select id="catalog-options" class="selectpicker pathParam" data-live-search="true" name="catName"
+                            data-style="form-control-sm " data-width="100%">
+                            <!--option value=" ">Escolha um catálogo...</option-->
+                            <option value="XXXXX">XXXXX</option>
+                            <!--option value="FINANCEIRO">FINANCEIRO</option-->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="repoName">Nome do Projeto</label>
+                        <input type="text" name="repoName" class="form-control form-control-sm inputForm pathParam rounded-0" autocomplete="off">
+                            <!--required pattern="[^\s]+"-->
+                    </div>            
+                    <div class="form-group">
+                            <label for="desc">Descrição</label>
+                            <input class="form-control form-control-sm inputForm  pathParam rounded-0" type="text" name="desc" autocomplete="off">
+                            <!--   required pattern="[^\s]+"--> 
+                    </div>
+                    <div class="form-group">
+                            <button class="form-control form-control-sm btn-primary btn-submit">Cadastrar</button>
+                    </div>
+                    <div>
+                        <input type="text" name="endPoint" value="catalogs/{catName}/repositories" class="endPoint select-option">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+	<div th:insert="fragments/footer :: footerScript"></div>
+	
+</body>
+</html>
