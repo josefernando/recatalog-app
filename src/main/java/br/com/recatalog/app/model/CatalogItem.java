@@ -51,7 +51,7 @@ public class CatalogItem implements Serializable{
 		return id ; 
 	}
 	
-	public void setId(String id) {
+	private void setId(String id) {
 		if(getParent() != null) {
 			this.id = getParent().getId().concat(".").concat(id);
 		}
@@ -70,6 +70,7 @@ public class CatalogItem implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+		setId(name);
 	}
 	
 	public String getDescription() {

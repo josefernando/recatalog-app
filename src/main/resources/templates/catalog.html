@@ -11,23 +11,38 @@
 
     <div id="accordionCatalog">
         <div class="container actionForm accordion" id="newCatalog">
-            <a  class="nav-link" href="#toggleNewCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleNewCatalog">Adicionar Catálogo</a>
-            <div id="toggleNewCatalog" class="collapse" data-parent="#accordionCatalog"> <!--class="collapse show"-->
-                <form id="addCatForm" action="localhost:9080/arcatalog/catalogs" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
+        
+        <!-- <a  href="#toggleNewCatalog"> and button ... data-target="#toggleNewCatalog" -->
+            <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleNewCatalog" data-toggle="collapse"  data-target="#toggleNewCatalog" aria-expanded="false" >Adicionar Catálogo</a>
+            <a th:if = "${msg == null }" class="nav-link" href="#toggleNewCatalog" data-toggle="collapse" data-target="#toggleNewCatalog" aria-expanded="false" >Adicionar Catálogo</a>
+
+            <div id="toggleNewCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionCatalog"> <!--class="collapse show"-->
+        
+	         <div th:if = "${msg != null }"    class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+	         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
+	             	<p class=" mb-0 ">Catalogo incluído com sucesso.</p>
+	             </button>
+	         </div>
+         
+                <form id="addCatForm" action="/recatalog/addCatalog" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
                     <p class="small text-center">Novo Catálogo</p>
                     <div class="form-group">
                         <label for="catalogName">Nome do Catálogo</label>
-                        <input type="text" name="catName" class="form-control form-control-sm inputForm pathParam rounded-0" autocomplete="off">
+                        <input type="text" name="name" class="form-control form-control-sm inputForm pathParam rounded-0" autocomplete="off">
                             <!--required pattern="[^\s]+"-->
                     </div>
                     <div class="form-group">
                             <label for="description">Descrição</label>
-                            <input class="form-control form-control-sm inputForm  pathParam rounded-0" type="text" name="desc" autocomplete="off">
+                            <input class="form-control form-control-sm inputForm  pathParam rounded-0" type="text" name="description" autocomplete="off">
                             <!--   required pattern="[^\s]+"--> 
                     </div>
                     <div class="form-group">
+                    <!-- 
                         <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Add Catalog"  onclick="actionPostCatalog('addCatForm','catalogs')"/>
+					-->
+                    <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Adicionar"  />
                     </div>
+                    <!-- 
                     <div class="form-group">
                             <button class="form-control form-control-sm btn-primary btn-submit">Adicionar</button>
                     </div>
@@ -35,6 +50,7 @@
                     <div>
                         <input type="text" name="endPoint" value="catalogs/{catName}/catalog" class="endPoint">
                     </div>
+                    -->
                 </form>
             </div>
         </div>

@@ -96,7 +96,7 @@ public class CatalogDAOHibernateTest {
 	@Test
 	public void testAddCatalog() {
 		Catalog catalog = new Catalog();
-		catalog.setId("FINANCEIRO");
+//		catalog.setId("FINANCEIRO");
 		catalog.setName("FINANCEIRO");
 		catalog.setDescription("FINANCEIRO DESCRIPTION");
 		catalog.setDtCreated(new Date());
@@ -114,7 +114,7 @@ public class CatalogDAOHibernateTest {
 	@Test
 	public void testAddCatalogItem() {
 		CatalogItem catalog = new Catalog();
-		catalog.setId("CAMBIO");
+//		catalog.setId("CAMBIO");
 		catalog.setName("CAMBIO");
 		catalog.setDescription("CAMBIO DESCRIPTION");
 		catalog.setDtCreated(new Date());
@@ -133,10 +133,10 @@ public class CatalogDAOHibernateTest {
 	@Test
 	public void testAddSourceRepository() {
 		CatalogItem ci = new CatalogItem();
-		ci.setId("FINANCEIRO");
+//		ci.setId("FINANCEIRO");
 		
 		SourceRepository catalog = new SourceRepository();
-		catalog.setId("REPOSITORY");
+//		catalog.setId("REPOSITORY");
 		catalog.setName("REPOSITORY");
 		catalog.setDescription("FINANCEIRO DESCRIPTION");
 		catalog.setDtCreated(new Date());

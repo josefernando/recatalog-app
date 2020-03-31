@@ -12,10 +12,7 @@ $('#listAllCatalog').on("click", function(e){
 //Executa evento no "show" do collapse element
 $('#toggleNewCatalog').on('show.bs.collapse', function () {
 	
-	console.log(" PASSO 99: " + this);
-
-	console.log($(this).prev());
-	
+	console.log(" PASSO 99x: " + this);
  	$(this).prev().addClass("text-center font-weight-light display-4");
 
 });
@@ -23,7 +20,10 @@ $('#toggleNewCatalog').on('show.bs.collapse', function () {
 //=======================
 //Executa evento no "hide" do collapse element
 $('#toggleNewCatalog').on('hide.bs.collapse', function () {
- $(this).prev().removeClass("text-center font-weight-light display-4");   
+ $(this).prev().removeClass("text-center font-weight-light display-4");  
+ 
+ // remove mesagens de sucesso ou de falha
+$(".alert").remove();
 });
 //=======================
 //***************************************************************************
