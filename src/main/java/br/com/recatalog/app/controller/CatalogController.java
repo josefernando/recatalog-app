@@ -36,22 +36,22 @@ public class CatalogController {
 	
 	@PostMapping("/addCatalog")
 	public String addCatalog(@RequestParam(name = "name") String catName, @RequestParam String description, Model model) {
+		
+		  CatalogService catalogService;
+		 
+		  catalogService = new CatalogService();
+		  
+		  PropertyList propertyList = new PropertyList();
+		  
+		  System.out.println("Name: " + catName);
+		  System.out.println("Description: " + description);
 
-		/*
-		 * CatalogService catalogService;
-		 * 
-		 * catalogService = new CatalogService();
-		 * 
-		 * PropertyList propertyList = new PropertyList();
-		 * 
-		 * propertyList.addProperty("NAME", propertyList);
-		 * propertyList.addProperty("DESCRIPTION", description);
-		 * 
-		 * catalogService.addCatalogItem(propertyList);
-		 */
+		  propertyList.addProperty("NAME", catName);
+		  propertyList.addProperty("DESCRIPTION", description);
+		  
+		  catalogService.addCatalogItem(propertyList);
+		 
 		model.addAttribute("msg", "success");
 		return "catalog.html";
-	}
-	
-	
+	}	
 }

@@ -6,7 +6,6 @@ import br.com.recatalog.app.dao.CatalogDAO;
 import br.com.recatalog.app.dao.CatalogDAOHibernate;
 import br.com.recatalog.app.model.Catalog;
 import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.PropertyCatalog;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogService {
