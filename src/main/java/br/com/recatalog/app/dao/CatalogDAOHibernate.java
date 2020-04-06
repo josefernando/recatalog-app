@@ -80,7 +80,6 @@ public class CatalogDAOHibernate implements CatalogDAO{
 
 	@Override
 	public PropertyList addCatalogItem(PropertyList properties) {
-		
 		EntityManagerFactory ENTITY_MANAGER_FACTORY =
 				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -104,7 +103,8 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		ENTITY_MANAGER_FACTORY.close();		
 
-		return null;
+		return properties;
+
 	}
 	
 	@Override

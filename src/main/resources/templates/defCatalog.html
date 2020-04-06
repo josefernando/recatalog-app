@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- 
+    1. O erro na console do browser pode esquecer
+    'DevTools failed to parse SourceMap: file:///C:/projetos/html-components/js/bootstrap/popper.min.js.map'
+-->
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-select/bootstrap-select.min.css">
+    
+    <link rel="stylesheet" href="/css/custom/main.css">
+    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css">
+    <title>Definir Catálogo</title>
+</head>
+<body>
+    <div id="accordionCatalog">
+    <div class="container justify-content-center ">
+        <div class="row col-md-5 font-weight-light" >
+            <a class="nav-link pb-0" href="#toggleDefCatalog" data-toggle="collapse"  aria-expanded="false" >Definir Catálogo</a>
+        </div>
+        
+        <div id="toggleDefCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionCatalog"> <!--class="collapse show"-->
+        
+         <div th:if = "${msg == 'success' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
+             	<p class=" mb-0 ">Catalogo incluído com sucesso.</p>
+             </button>
+         </div>
+         
+         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
+             	<p class=" mb-0 ">Falha na definição do Catalogo.</p>
+             </button>
+         </div>
+        
+        <!-- tutorial for form validation: https://www.youtube.com/watch?v=K-ccGZYRWzs&t=554s-->
+            <form id="formDefCatalog collapse" class="needs-validation" novalidate data-parent="#accordionCatalog" action="/recatalog/defCatalog" method="post" enctype="application/x-www-form-urlencoded" >
+            <div class="row justify-content-center">
+                <p class="col-md-4 small text-center mt-0 text-muted">Novo Catálogo</p>
+            </div>    
+            <div class="row justify-content-center">
+                <div class="form-group col-md-4">
+                    <label for="catalogName">Nome</label>
+                    <input type="text" name="catName" class="form-control form-control-sm inputForm pathParam " 
+                        autocomplete="off" required pattern="[A-Za-z][\w]*">
+                    <div class="invalid-feedback">Informe o nome do catálogo</div>
+                    <!--required pattern="[^\s]+"-->
+                </div>
+            </div>
+            <div class="row justify-content-center" >
+                <div class="form-group col-md-4">
+                        <label for="description">Descrição</label>
+                        <input class="form-control form-control-sm inputForm  pathParam " type="text" name="description" autocomplete="off">
+                        <!--   required pattern="[^\s]+"--> 
+                </div>
+            </div>  
+            <div class="row justify-content-center">  
+                <div class="form-group col-md-4 my-2 ">
+                    <button id="submit-btn" class="btn btn-primary btn-sm btn-block " type="submit" >Incluir</button>
+                </div>
+            </div>    
+        </form>
+    </div>
+    </div>
+    </div>
+    <!--script src="../../js/bootstrap/jquery-3.3.1.slim.min.js"></script  NÃO TEM AJAX --> 
+    <!-- então foi substituido por jquery-3.4.1.min.js --> 
+    
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap-select/1.4.2/bootstrap-select.min.js"></script>
+    
+    <!-- script src="../js/custom/handlers.js"></script-->
+    <script>
+        var form = document.querySelector('.needs-validation');
+
+        form.addEventListener('submit', function(event){
+            if(form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+            
+        console.log(form.checkValidity());
+        $("#submit-btn").attr("disabled", !form.checkValidity());
+        });
+
+        form.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener(('input'), () => {
+                $("#submit-btn").attr("disabled", !form.checkValidity());
+            });
+        });
+    </script>
+    <script>
+        $('#toggleDefCatalog').on('show.bs.collapse', function () {
+            $(this).prev().addClass("displayFormText m-auto justify-content-center");
+        });
+
+        $('#toggleDefCatalog').on('hide.bs.collapse', function () {
+        $(this).prev().removeClass("displayFormText m-auto justify-content-center");  
+
+        });
+        
+        $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert-dismissible").alert('close');
+        });
+    </script>
+</body>
+</html>

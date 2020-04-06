@@ -17,11 +17,11 @@
 		    
 		    <title>Recatalog</title>
 		    
-		    	<style>
-		.aze .breadcrumb-item+.breadcrumb-item::before {
-		  content: ">";
-		}
-	</style>
+	 	<style>
+			.re-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+			  content: ">";
+			}
+		</style>
 		</div>
 		
 		<div th:fragment="topMenu">
@@ -34,6 +34,9 @@
 		                    </li>
 		                    <li class="nav-item">
 		                        <a class="nav-link " href="/recatalog/catalog.html">Catálogo</a>
+		                    </li>
+		                    <li class="nav-item">
+		                        <a class="nav-link " href="/recatalog/defCatalog.html">Definir Catálogo</a>
 		                    </li>
 		                    <li class="nav-item">
 		                        <a class="nav-link " href="/recatalog/project.html">Projeto</a>
@@ -57,7 +60,7 @@
 		    </nav>	
 		<div class="containe-fluid">
 			<nav aria-label="breadcrumb">
-			  <ol class="breadcrumb py-0 mb-0 aze">
+			  <ol class="breadcrumb py-0 mb-0 re-breadcrumb">
 			    <li class="breadcrumb-item"><a href="#">&#183;&nbsp;</li>
 			    <li class="breadcrumb-item"><a href="#">catalog-name</a></li>
 			    <li class="breadcrumb-item active" aria-current="page">project-name</li>

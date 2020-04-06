@@ -52,3 +52,7 @@
 div#accordion a {
     transition: font-size 1s;
 }
+
+.displayFormText {
+    font-size: 35px;
+}

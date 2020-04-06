@@ -29,6 +29,12 @@ public class CatalogController {
 		return "catalog.html";
 	}
 	
+	
+	@GetMapping("/defCatalog.html") 
+	public String defCatalog() {
+		return "DefCatalog.html";
+	}
+	
 	@GetMapping("/project.html") 
 	public String project() {
 		return "project.html";
@@ -53,5 +59,33 @@ public class CatalogController {
 		 
 		model.addAttribute("msg", "success");
 		return "catalog.html";
-	}	
+	}
+	
+	@PostMapping("/defCatalog")
+	public String defCatalog(@RequestParam(name = "catName") String catName, @RequestParam String description, Model model) {
+		
+		  CatalogService catalogService;
+		 
+		  catalogService = new CatalogService();
+		  
+		  PropertyList propertyList = new PropertyList();
+		  
+		/*
+		 * System.out.println("Name: " + catName); System.out.println("Description: " +
+		 * description);
+		 */
+		  
+		  if(catName.isEmpty()) return "defCatalog.html";
+
+		  propertyList.addProperty("NAME", catName);
+		  propertyList.addProperty("DESCRIPTION", description);
+		  
+		  catalogService.addCatalogItem(propertyList);
+		  
+		  if(propertyList.hasProperty("EXCEPTION")) {
+			  model.addAttribute("msg", "error");
+		  }
+		  else 	model.addAttribute("msg", "success");
+		return "defCatalog.html";
+	}
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- meta UTF-8 não funcional se dentro do fragment -->
 	<meta charset="UTF-8">
@@ -28,7 +28,8 @@
                     <p class="small text-center">Novo Catálogo</p>
                     <div class="form-group">
                         <label for="catalogName">Nome do Catálogo</label>
-                        <input type="text" name="name" class="form-control form-control-sm inputForm pathParam rounded-0" autocomplete="off">
+                        <input id="my-name" type="text" name="name" class="form-control form-control-sm inputForm pathParam rounded-0"
+                        		 autocomplete="off">
                             <!--required pattern="[^\s]+"-->
                     </div>
                     <div class="form-group">
@@ -103,6 +104,10 @@
     
 
 <div th:insert="fragments/footer :: footerScript"></div>
+<!-- script src="/js/bootstrap-validate/bootstrap-validate.js"></script-->
+<!-- script>
+	bootstrapValidate('#my-name', 'required:Please fill out this field!')
+</script-->
 
 </body>
 </html>
