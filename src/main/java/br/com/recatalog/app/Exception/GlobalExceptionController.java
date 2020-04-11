@@ -7,40 +7,41 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
-@EnableWebMvc
+//@EnableWebMvc
+
+/*
+ * ref: https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc#sample-application
+ */
 public class GlobalExceptionController {
 	private Logger logger = LoggerFactory.getLogger(GlobalExceptionController.class);
 	
 	@ExceptionHandler(value = Exception.class)
-	public String handlerError(HttpServletRequest req, Exception exception, Model model) {
+	public ModelAndView handlerError(HttpServletRequest req, Exception exception) {
 		Exception e = null;
 		for(Throwable t : findCauseUsingPlainJava(exception)) {
 			e = (Exception) t;
 			logger.error("Request: " + req.getRequestURL() + " raised " + e);
 		}
-//		logger.error("Request: " + req.getRequestURL() + " raised " + exception);
-//		logger.error("Request2: " + req.getRequestURL() + " raised " + exception);
+		
+		ModelAndView mav = new ModelAndView();
 
-		model.addAttribute("msg", getMsg(e));
-		return "error";
-	}
-	
-	
+		mav.setViewName("error");
+		mav.addObject("msg", getMsg(e));
+		return mav;
+	}	
 	
 	/*
 	 * Find the root cause of the exception
 	 * how-to: https://www.baeldung.com/java-exception-root-cause
 	 */
-	public static List<Throwable> findCauseUsingPlainJava(Throwable throwable) {
+	public  List<Throwable> findCauseUsingPlainJava(Throwable throwable) {
 		List<Throwable> throwables = new ArrayList();
 	    Objects.requireNonNull(throwable);
 	    Throwable rootCause = throwable;
@@ -49,7 +50,6 @@ public class GlobalExceptionController {
 	        rootCause = rootCause.getCause();
 		    throwables.add(rootCause);
 	    }
-	    //return rootCause;
 	    return throwables;
 	}
 	
@@ -62,9 +62,5 @@ public class GlobalExceptionController {
 		 }
 		 else 
 		 return ex.getMessage();
-	}
-	
-	
-	
-	
+	}	
 }
