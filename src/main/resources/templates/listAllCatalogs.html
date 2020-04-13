@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- meta UTF-8 não funcional se dentro do fragment -->
+	<meta charset="UTF-8">
+	<div th:replace="fragments/header :: header"></div>
+	<title>Lista de Catálogos</title>
+</head>
+<body>
+
+	<div th:insert="fragments/header :: topMenu"></div>
+	
+	<div class="container">
+		<div th:if="${not #lists.isEmpty(catalogs)}">
+			<h2>Catálogos</h2>
+			<table class="table table-hover table-sm">
+				<thead id="headerListAllCatalog">
+                    <tr>
+                        <th class="pb-0">Name</th>
+                        <th class="pb-0">Description</th>
+                        <th class="pb-0">Data De Criação</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyListAllCatalog">
+                    <tr th:each="catalog : ${catalogs}">
+                        <td class="pb-0" th:text="${catalog.name}"></td>
+                        <td class="pb-0" th:text="${catalog.description}"></td>
+                        <td class="pb-0" th:text="${catalog.createdOn}"></td>
+                    </tr>
+                </tbody>                
+			</table>
+		</div>
+	</div>
+	
+	<div th:insert="fragments/footer :: footerScript"></div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package br.com.recatalog.app.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -86,5 +87,10 @@ public class CatalogService {
 	public Catalog create(Catalog catalog) {
 		Catalog savedCatalog = catalogRepository.save(catalog);
 		return savedCatalog;
-	}	
+	}
+	
+	public List<CatalogItem> listAllCatalogItens(){
+		List<CatalogItem> itens = catalogRepository.findAll();
+		return itens;
+	}
 }

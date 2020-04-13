@@ -97,11 +97,9 @@ public class CatalogController {
 		return "defCatalog.html";
 	}
 	
-	@GetMapping("/git-config") 
-	@ResponseBody
-	public String gitConfig() {
-		System.out.println(gitConfig.getUrlBase());
-//		return gitConfig.getUrlBase();
-		return urlBase;
+	@GetMapping("/catalogs") 
+	public String listAllCatalogs(Model model) {
+	model.addAttribute("catalogs", catalogService.listAllCatalogItens());
+		return "listAllCatalogs.html";
 	}
 }
