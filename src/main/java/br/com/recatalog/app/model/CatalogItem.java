@@ -17,10 +17,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.domain.Persistable;
+
 @Entity
 @Table(name = "TBCATALOG_ITEM")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class CatalogItem implements Serializable{
+public class CatalogItem implements Serializable, Persistable{
 	private static final long serialVersionUID = 1L;
 	
 	public CatalogItem() {
@@ -134,6 +136,20 @@ public class CatalogItem implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		return true;
+	}
+
+	/* IMPORTANTE: implements PERSITABLE para pegar (catch) "duplicate key"
+	 *             senão haverá update no método "save"
+	 *  Spring JPA repository: prevent update on save
+	 *  
+	 *  - By default, a Property-ID inspection is performed, if it is null, then it is a new entity, otherwise is not.
+        - If the entity implements Persistable the detection will 
+          be delegated to the isNew() method implemented by the entity.
+	 */
+	
+	@Override
+	public boolean isNew() {
 		return true;
 	}
 }
