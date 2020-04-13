@@ -1,6 +1,7 @@
 package br.com.recatalog.app.service;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -59,7 +60,9 @@ public class CatalogService {
 	public PropertyList addCatalogItem(PropertyList propertyList) {
 		catalogDAO = new CatalogDAOHibernate();		
 		
-		CatalogItem catalog = new Catalog();
+//		CatalogItem catalog = new Catalog();
+		Catalog catalog = new Catalog();
+
 		catalog.setName((String)propertyList.mustProperty("NAME"));
 		catalog.setDescription((String)propertyList.mustProperty("DESCRIPTION"));
 		catalog.setDtCreated(new Date());
@@ -67,6 +70,14 @@ public class CatalogService {
 
 //		propertyList.addProperty("ENTITY", catalog);
 //		catalogDAO.addCatalogItem(propertyList);
+		
+		Optional<CatalogItem> hasCatalog = catalogRepository.findById(catalog.getId());
+
+		if(!hasCatalog.isEmpty()) {
+			propertyList.addProperty("EXCEPTION", "DUP KEY");
+			return propertyList;
+		}
+		
 		CatalogItem savedCatalog = catalogRepository.save(catalog);
 		propertyList.addProperty("ENTITY", savedCatalog);
 		return propertyList;
