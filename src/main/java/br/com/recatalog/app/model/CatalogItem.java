@@ -29,7 +29,7 @@ public class CatalogItem implements Serializable{
 
 	@Id
 	@Column(name="ID", unique = true)
-	private String id;
+	protected String id;
 
 	@Column(name="CREATED_ON", nullable=false)
 	private Date createdOn;
@@ -83,6 +83,7 @@ public class CatalogItem implements Serializable{
 	public CatalogItem getParent() {
 		return parent;
 	}
+	
 	public void setParent(CatalogItem parent) {
 		this.parent = parent;
 		

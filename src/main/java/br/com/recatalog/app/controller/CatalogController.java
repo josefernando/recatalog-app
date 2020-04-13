@@ -1,7 +1,7 @@
 package br.com.recatalog.app.controller;
 
-import java.util.Date;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.recatalog.app.model.Catalog;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.PropertyCatalog;
+import br.com.recatalog.app.configuration.GitConfiguration;
 import br.com.recatalog.app.service.CatalogService;
 import br.com.recatalog.util.PropertyList;
 
 @Controller
 @RequestMapping("recatalog") 
 public class CatalogController {
+	
+	@Autowired
+	private GitConfiguration gitConfig;
+	
+	@Autowired
+	private CatalogService catalogService;
+	
+	@Value("${urlBase}")
+	private String urlBase;
+	
 	@GetMapping("") 
 	public String home() {
 		return "index.html";
@@ -43,9 +51,9 @@ public class CatalogController {
 	@PostMapping("/addCatalog")
 	public String addCatalog(@RequestParam(name = "name") String catName, @RequestParam String description, Model model) {
 		
-		  CatalogService catalogService;
+//		  CatalogService catalogService;
 		 
-		  catalogService = new CatalogService();
+//		  catalogService = new CatalogService();
 		  
 		  PropertyList propertyList = new PropertyList();
 		  
@@ -64,9 +72,9 @@ public class CatalogController {
 	@PostMapping("/defCatalog")
 	public String defCatalog(@RequestParam(name = "catName") String catName, @RequestParam String description, Model model) {
 		
-		  CatalogService catalogService;
+//		  CatalogService catalogService;
 		 
-		  catalogService = new CatalogService();
+//		  catalogService = new CatalogService();
 		  
 		  PropertyList propertyList = new PropertyList();
 		  
@@ -87,5 +95,13 @@ public class CatalogController {
 		  }
 		  else 	model.addAttribute("msg", "success");
 		return "defCatalog.html";
+	}
+	
+	@GetMapping("/git-config") 
+	@ResponseBody
+	public String gitConfig() {
+		System.out.println(gitConfig.getUrlBase());
+//		return gitConfig.getUrlBase();
+		return urlBase;
 	}
 }

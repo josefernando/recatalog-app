@@ -1,5 +1,7 @@
 package br.com.recatalog.app.Exception;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +32,22 @@ public class GlobalExceptionController {
 			logger.error("Request: " + req.getRequestURL() + " raised " + e);
 		}
 		
+		String msg = getMsg(e); 
+		
+		StringWriter exceptionStackError = new StringWriter();
+		e.printStackTrace(new PrintWriter(exceptionStackError));
+		
+		logger.error( exceptionStackError.toString());
+
+		
+		msg = msg != null ? msg : e.toString();
+		
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("error");
-		mav.addObject("msg", getMsg(e));
+//		mav.addObject("msg", getMsg(e));
+		mav.addObject("msg", msg);
+
 		return mav;
 	}	
 	

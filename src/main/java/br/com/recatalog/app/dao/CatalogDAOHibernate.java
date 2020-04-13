@@ -4,13 +4,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import br.com.recatalog.app.model.Catalog;
 import br.com.recatalog.app.model.CatalogItem;
 import br.com.recatalog.app.model.PropertyCatalog;
 import br.com.recatalog.app.model.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
-public class CatalogDAOHibernate implements CatalogDAO{
+@Component("CatalogDAOHibernate")
+//@Qualifier("hibernate")
+public class CatalogDAOHibernate implements CatalogDAO {
 	
 	@Override
 	public PropertyList getCatalogById(PropertyList properties) {
@@ -26,12 +31,7 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		properties.addProperty("ENTITY", catalog);
 		
-		System.out.println(catalog.getId());
-		
 		em.close();
-		
-		System.err.println(catalog.getId() + " " + catalog.getName());
-		
 		ENTITY_MANAGER_FACTORY.close();		
 		
 		return properties;

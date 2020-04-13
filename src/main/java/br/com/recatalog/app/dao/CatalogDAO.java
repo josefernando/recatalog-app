@@ -1,5 +1,7 @@
 package br.com.recatalog.app.dao;
 
+import org.springframework.stereotype.Component;
+
 import br.com.recatalog.util.PropertyList;
 
 public interface CatalogDAO {
