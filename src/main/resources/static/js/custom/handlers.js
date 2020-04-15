@@ -27,10 +27,21 @@ $(".alert").remove();
 
 //====================================================================
 $('#toggleCreateCatalog').on('show.bs.collapse', function () {
-	
-	console.log(" PASSO 99x: " + this);
-	
  	$(this).prev().addClass("text-center font-weight-light display-4");
+ 	
+ 	
+// 	var str =$(this).prev().html(); // pega texto do menu
+// 	
+// 	var regex = /[^<]+/;
+//
+// 	var match = regex.exec(str);
+// 	console.log(match[0]);        
+//
+// 	var xxx = '<i class="fas fa-angle-left"></i> ' + match[0];
+// 	
+// 	$(this).prev().html(xxx);
+ 	
+ 	//($(this).prev()).prepend$('<i class="fas fa-angle-left"></i>');
 });
 
 $('#toggleCreateCatalog').on('hide.bs.collapse', function () {

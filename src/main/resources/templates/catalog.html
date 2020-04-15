@@ -10,26 +10,23 @@
 	<div th:insert="fragments/header :: topMenu"></div>
 
     <div id="accordionSubMenuCatalog">
-        <div class="container accordion">
-<!-- 
-            <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleCreateCatalog" data-toggle="collapse"  data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo</a>
+        <div class="container-fluid accordion">
+
+            <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleCreateCatalog" data-toggle="collapse"  data-target="#toggleCreateCatalog" aria-expanded="true"> Criarr Catálogo</a>
+            <!-- 
+            <a th:if = "${msg == null }" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo <i class="fas fa-angle-right"></i></a>
+		-->
             <a th:if = "${msg == null }" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo</a>
--->
-            <a id="createCatalogLink" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="false" >Criar Catálogo</a>
-
-
 
             <div id="toggleCreateCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuCatalog">
-		         <div th:if = "${msg == 'sucess' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
-		         	<button type="button" class="close fade show" data-dismiss="alert">&times;
+		         <div th:if = "${msg == 'success' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
 		             	<p class=" mb-0 ">Catálogo Criado Com Sucesso</p>
-		             </button>
 		         </div>
 		         
 		         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
-		         	<button type="button" class="close fade show" data-dismiss="alert">&times;
+		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
 		             	<p class=" mb-0 ">Falha Na Criação Do Catálogo</p>
-		             </button>
 		         </div>
 		         
 	             <form id="formCreateCatalog" class="needs-validation" novalidate action="/recatalog/createCatalog" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
@@ -38,6 +35,7 @@
 	                     <label for="catalogName">Nome do Catálogo</label>
 	                     <input type="text" name="catalogName" class="form-control form-control-sm inputForm pathParam"
 	                     		 autocomplete="off" required pattern="[A-Za-z][\w]*">
+	                     <div class="invalid-feedback">Informe o nome do catálogo</div>	                     		 
 	                 </div>
 	                 <div class="form-group">
 	                         <label for="description">Descrição</label>
@@ -48,12 +46,12 @@
 	                 </div>
 	             </form>
             </div>
-        </div>
+        <!-- /div-->
 
         <hr class="my-0" >
 
-        <div class="container " id="listAllCatalog">
-            <a  id="listAllCatalogLink" class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a>
+        <!-- div class="container " id="listAllCatalog"-->
+            <a  class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a>
             <div id="toggleListAllCatalog" class="collapse" data-parent="#accordionSubMenuCatalog">            
                 <table class="table table-hover table-sm">
                     <thead id="headerListAllCatalog">
