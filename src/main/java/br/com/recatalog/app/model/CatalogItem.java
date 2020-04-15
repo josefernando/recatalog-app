@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.domain.Persistable;
 
@@ -37,9 +39,11 @@ public class CatalogItem implements Serializable, Persistable{
 	private Date createdOn;
 	
 	@Column(name="NAME", nullable=false)
+	@NotBlank
     private String name;
     
-	@Column(name="DESCRIPTION", nullable=false)  
+	@Column(name="DESCRIPTION", nullable=false)
+	@NotBlank
     private String description;
     
 	@OneToOne()  // foreign key  
