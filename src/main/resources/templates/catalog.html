@@ -4,64 +4,57 @@
     <!-- meta UTF-8 não funcional se dentro do fragment -->
 	<meta charset="UTF-8">
 	<div th:replace="fragments/header :: header"></div>
+	<title>Catalog</title>
 </head>
 <body>
-
 	<div th:insert="fragments/header :: topMenu"></div>
 
-    <div id="accordionCatalog">
-        <div class="container actionForm accordion" id="newCatalog">
-        
-        <!-- <a  href="#toggleNewCatalog"> and button ... data-target="#toggleNewCatalog" -->
-            <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleNewCatalog" data-toggle="collapse"  data-target="#toggleNewCatalog" aria-expanded="false" >Adicionar Catálogo</a>
-            <a th:if = "${msg == null }" class="nav-link" href="#toggleNewCatalog" data-toggle="collapse" data-target="#toggleNewCatalog" aria-expanded="false" >Adicionar Catálogo</a>
+    <div id="accordionSubMenuCatalog">
+        <div class="container accordion">
+<!-- 
+            <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleCreateCatalog" data-toggle="collapse"  data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo</a>
+            <a th:if = "${msg == null }" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo</a>
+-->
+            <a id="createCatalogLink" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="false" >Criar Catálogo</a>
 
-            <div id="toggleNewCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionCatalog"> <!--class="collapse show"-->
-        
-	         <div th:if = "${msg != null }"    class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
-	         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
-	             	<p class=" mb-0 ">Catalogo incluído com sucesso.</p>
-	             </button>
-	         </div>
-         
-                <form id="addCatForm" action="/recatalog/addCatalog" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
-                    <p class="small text-center">Novo Catálogo</p>
-                    <div class="form-group">
-                        <label for="catalogName">Nome do Catálogo</label>
-                        <input id="my-name" type="text" name="name" class="form-control form-control-sm inputForm pathParam rounded-0"
-                        		 autocomplete="off">
-                            <!--required pattern="[^\s]+"-->
-                    </div>
-                    <div class="form-group">
-                            <label for="description">Descrição</label>
-                            <input class="form-control form-control-sm inputForm  pathParam rounded-0" type="text" name="description" autocomplete="off">
-                            <!--   required pattern="[^\s]+"--> 
-                    </div>
-                    <div class="form-group">
-                    <!-- 
-                        <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Add Catalog"  onclick="actionPostCatalog('addCatForm','catalogs')"/>
-					-->
-                    <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Adicionar"  />
-                    </div>
-                    <!-- 
-                    <div class="form-group">
-                            <button class="form-control form-control-sm btn-primary btn-submit">Adicionar</button>
-                    </div>
 
-                    <div>
-                        <input type="text" name="endPoint" value="catalogs/{catName}/catalog" class="endPoint">
-                    </div>
-                    -->
-                </form>
+
+            <div id="toggleCreateCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuCatalog">
+		         <div th:if = "${msg == 'sucess' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+		         	<button type="button" class="close fade show" data-dismiss="alert">&times;
+		             	<p class=" mb-0 ">Catálogo Criado Com Sucesso</p>
+		             </button>
+		         </div>
+		         
+		         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+		         	<button type="button" class="close fade show" data-dismiss="alert">&times;
+		             	<p class=" mb-0 ">Falha Na Criação Do Catálogo</p>
+		             </button>
+		         </div>
+		         
+	             <form id="formCreateCatalog" class="needs-validation" novalidate action="/recatalog/createCatalog" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
+	                 <p class="small text-center">Novo Catálogo</p>
+	                 <div class="form-group">
+	                     <label for="catalogName">Nome do Catálogo</label>
+	                     <input type="text" name="catalogName" class="form-control form-control-sm inputForm pathParam"
+	                     		 autocomplete="off" required pattern="[A-Za-z][\w]*">
+	                 </div>
+	                 <div class="form-group">
+	                         <label for="description">Descrição</label>
+	                         <input class="form-control form-control-sm inputForm  pathParam " type="text" name="description" autocomplete="off">
+	                 </div>
+	                 <div class="form-group">
+		                 <input id="submit-btn" class="form-control form-control-sm btn-primary " type="submit" value="Criar"  />
+	                 </div>
+	             </form>
             </div>
         </div>
 
-
         <hr class="my-0" >
 
-        <div class="container actionForm " id="listAllCatalog">
+        <div class="container " id="listAllCatalog">
             <a  id="listAllCatalogLink" class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a>
-            <div id="toggleListAllCatalog" class="collapse" data-parent="#accordionCatalog">            
+            <div id="toggleListAllCatalog" class="collapse" data-parent="#accordionSubMenuCatalog">            
                 <table class="table table-hover table-sm">
                     <thead id="headerListAllCatalog">
                     <tr>
@@ -102,11 +95,30 @@
         </div>
     </div>    
 
+<div th:insert="fragments/modals :: reModalLogin"></div>
+
 <div th:insert="fragments/footer :: footerScript"></div>
-<!-- script src="/js/bootstrap-validate/bootstrap-validate.js"></script-->
-<!-- script>
-	bootstrapValidate('#my-name', 'required:Please fill out this field!')
-</script-->
+
+<script>
+	var form = document.querySelector('.needs-validation');
+	
+	form.addEventListener('submit', function(event){
+	    if(form.checkValidity() === false) {
+	        event.preventDefault();
+	        event.stopPropagation();
+	    }
+	    form.classList.add('was-validated');
+	    
+	console.log(form.checkValidity());
+	$("#submit-btn").attr("disabled", !form.checkValidity());
+	});
+	
+	form.querySelectorAll('.form-control').forEach(input => {
+	    input.addEventListener(('input'), () => {
+	        $("#submit-btn").attr("disabled", !form.checkValidity());
+	    });
+	});
+</script>
 
 </body>
 </html>

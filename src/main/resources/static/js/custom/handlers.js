@@ -17,17 +17,27 @@ $('#toggleNewCatalog').on('show.bs.collapse', function () {
 
 });
 
-//=======================
 //Executa evento no "hide" do collapse element
 $('#toggleNewCatalog').on('hide.bs.collapse', function () {
  $(this).prev().removeClass("text-center font-weight-light display-4");  
  
- // remove mesagens de sucesso ou de falha
+ // remove messagens de sucesso ou de falha
 $(".alert").remove();
 });
-//=======================
-//***************************************************************************
 
+//====================================================================
+$('#toggleCreateCatalog').on('show.bs.collapse', function () {
+	
+	console.log(" PASSO 99x: " + this);
+	
+ 	$(this).prev().addClass("text-center font-weight-light display-4");
+});
+
+$('#toggleCreateCatalog').on('hide.bs.collapse', function () {
+	$(this).prev().removeClass("text-center font-weight-light display-4");  
+	$(".alert").remove();
+});
+//=====================================================================
 
 // Executa evento no "show" do collapse element
 $('#toggleListAllCatalog').on('show.bs.collapse', function () {

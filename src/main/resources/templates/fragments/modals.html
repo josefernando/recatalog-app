@@ -1,0 +1,35 @@
+<html>
+	<body>
+		<div th:fragment="reModalLogin">
+
+    <!--Modal-->
+    <!--data-keyboard="false" previne sair do modal com escape-->
+    <!--data-backdrop="static" previne sair do modal com escape-->
+		    <div class="modal fade" data-keyboard="false" data-backdrop="static" id="re-modal-login" tabindex="-1" role="dialog">
+		        <div class="modal-dialog modal-sm modal-dialog-centered">            
+		            <div class="modal-content">
+		                <div class="modal-body">
+		                    <form>
+		                        <button class="close" data-dismiss="modal">&times;</button>
+		                        <h4 class="modal-title text-center bg-light font-weight-light" style="color:#007bff">Login</h4> 
+		                    </br>
+		                        <div class="form-group">
+		                            <label for="userName">Nome</label>
+		                            <input class="form-control form-control-sm" placeholder="Nome" type="text" id="loginUserName"/></input>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="password">Senha</label>
+		                            <input class="form-control form-control-sm" placeholder="Senha" type="text" id="loginPassword"></input>
+		                        </div>  
+		                        <div class="bg-light">
+		                            <button class="btn btn-link font-weight-light ">Enviar</button>
+		                            <button class="btn btn-link font-weight-light float-right" data-dismiss="modal">Fechar</button>
+		                        </div>                     
+		                    </form>
+		                </div>
+		            </div>
+		        </div>
+		    </div>		
+		</div>
+	</body>
+</html>

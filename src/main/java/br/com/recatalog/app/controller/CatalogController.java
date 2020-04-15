@@ -97,6 +97,24 @@ public class CatalogController {
 		return "defCatalog.html";
 	}
 	
+	@PostMapping("/createCatalog")
+	public String createCatalog(@RequestParam(name = "catalogName") String cataLogName, @RequestParam String description, Model model) {
+		  PropertyList propertyList = new PropertyList();
+		  
+		  if(cataLogName.isEmpty()) return "catalog.html";
+
+		  propertyList.addProperty("NAME", cataLogName);
+		  propertyList.addProperty("DESCRIPTION", description);
+		  
+		  catalogService.addCatalogItem(propertyList);
+		  
+		  if(propertyList.hasProperty("EXCEPTION")) {
+			  model.addAttribute("msg", "error");
+		  }
+		  else 	model.addAttribute("msg", "success");
+		return "catalog.html";
+	}
+	
 	@GetMapping("/catalogs") 
 	public String listAllCatalogs(Model model) {
 	model.addAttribute("catalogs", catalogService.listAllCatalogItens());

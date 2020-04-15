@@ -27,20 +27,17 @@
 		<div th:fragment="topMenu">
 		    <nav class="navbar navbar-expand-md demo-bg-color p-0" id="nav-top" >
 		        <div class="container-fluid">
-		            <a class="navbar-brand" href="#"><i class="fas fa-book-reader"></i> RE<scan>&#183;</scan>CATALOG</a>
+		            <a class="navbar-brand" href="/recatalog"><i class="fas fa-book-reader"></i> RE<scan>&#183;</scan>CATALOG</a>
 		                <ul class="navbar-nav mr-auto">
-		                    <li class="nav-item">
-		                        <a class="nav-link " href="/recatalog">Home</a>
-		                    </li>
 		                    <li class="nav-item">
 		                        <a class="nav-link " href="/recatalog/catalog.html">Catálogo</a>
 		                    </li>
 		                    <li class="nav-item">
-		                        <a class="nav-link " href="/recatalog/defCatalog.html">Definir Catálogo</a>
-		                    </li>
-		                    <li class="nav-item">
 		                        <a class="nav-link " href="/recatalog/project.html">Projeto</a>
 		                    </li> 
+		                    <li class="nav-item">
+		                        <a class="nav-link " href="#">Configuração</a>
+		                    </li>
 		                    <li class="nav-item">
 		                        <a class="nav-link " href="#">Código</a>
 		                    </li> 
@@ -50,7 +47,7 @@
 		                        <a class="nav-link " href="#">Tutorial</a>
 		                    </li> 
 		                    <li class="nav-item">
-		                        <a class="nav-link clickable" href="#loginModal" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Login</a>
+		                        <a class="nav-link clickable" href="#re-modal-login" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Login</a>
 		                        <!-- or button
 		                        <button class="btn btn-link" data-target="#loginModal" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Entrar</a>
 		                        -->
@@ -67,7 +64,6 @@
 			  </ol>
 			</nav>
 		<div>
-		 <hr class="my-0" >
-		
+		 <hr class="my-0" >		
 	</body>
 </html>
