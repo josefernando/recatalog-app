@@ -54,7 +54,7 @@
 				<p class="small text-center">Lista de Catálogos</p>
 				
 				<div th:if="${not #lists.isEmpty(catalogs)}">
-					<table class="table table-condensed table-hover table-sm">
+					<table class="table table-condensed table-hover table-sm"> 
 						<thead id="headerListAllCatalog">
 		                    <tr>
 		                        <th class="pb-0">Nome</th>
@@ -64,7 +64,7 @@
 		                </thead>
 		                <tbody id="bodyListAllCatalog">
 		                    <tr th:each="catalog : ${catalogs}">
-		                        <td class="pb-0" th:text="${catalog.name}"></td>
+		                        <td class="pb-0 clickable re-to-breadcrumb-catalog" th:text="${catalog.name}"></td>
 		                        <td class="pb-0" th:text="${catalog.description}"></td>
 		                        <td class="pb-0" th:text="${catalog.createdOn}"></td>
 		                    </tr>
@@ -102,6 +102,18 @@
 	    input.addEventListener(('input'), () => {
 	        $("#submit-btn").attr("disabled", !form.checkValidity());
 	    });
+	});
+</script>
+
+<script>
+	$(".re-to-breadcrumb-catalog").on('click', function () {
+		var toCatalogHtml = $(this).html(); 
+//		console.log(toCatalogHtml);
+//		console.log($(".re-breadcrumb-catalog").html());
+		$(".re-breadcrumb-catalog").html(toCatalogHtml);
+
+		console.log($(".re-breadcrumb-catalog").html());
+		$(".re-breadcrumb-catalog").parent().next().remove(); //.nextAll().remove(); 
 	});
 </script>
 
