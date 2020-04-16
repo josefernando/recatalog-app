@@ -89,6 +89,11 @@ public class CatalogService {
 		return savedCatalog;
 	}
 	
+	public List<CatalogItem> listCatalogItens(){
+		List<CatalogItem> itens = catalogRepository.findAll();
+		return itens;
+	}
+	
 	public List<CatalogItem> listAllCatalogItens(){
 		List<CatalogItem> itens = catalogRepository.findAll();
 		return itens;

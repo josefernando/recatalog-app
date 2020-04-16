@@ -116,6 +116,12 @@ public class CatalogController {
 	}
 	
 	@GetMapping("/catalogs") 
+	public String listCatalogs(Model model) {
+	model.addAttribute("catalogs", catalogService.listAllCatalogItens());
+		return "catalog.html";
+	}
+	
+	@GetMapping("/catalogsx") 
 	public String listAllCatalogs(Model model) {
 	model.addAttribute("catalogs", catalogService.listAllCatalogItens());
 		return "listAllCatalogs.html";

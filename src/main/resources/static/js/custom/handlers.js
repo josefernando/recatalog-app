@@ -27,65 +27,28 @@ $(".alert").remove();
 
 //====================================================================
 $('#toggleCreateCatalog').on('show.bs.collapse', function () {
- 	$(this).prev().addClass("text-center font-weight-light display-4");
- 	
- 	
-// 	var str =$(this).prev().html(); // pega texto do menu
-// 	
-// 	var regex = /[^<]+/;
-//
-// 	var match = regex.exec(str);
-// 	console.log(match[0]);        
-//
-// 	var xxx = '<i class="fas fa-angle-left"></i> ' + match[0];
-// 	
-// 	$(this).prev().html(xxx);
- 	
- 	//($(this).prev()).prepend$('<i class="fas fa-angle-left"></i>');
+ 	$(this).prev("a").addClass("text-center font-weight-light display-4");
+
 });
 
 $('#toggleCreateCatalog').on('hide.bs.collapse', function () {
-	$(this).prev().removeClass("text-center font-weight-light display-4");  
+	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
 	$(".alert").remove();
 });
 //=====================================================================
 
 // Executa evento no "show" do collapse element
 $('#toggleListAllCatalog').on('show.bs.collapse', function () {
-     var webServer = "http://localhost:9080";
-     var urlBase   = "arcatalog";
-     var endPoint  = "catalogs";
-     var routePoint = `${webServer}/${urlBase}/${endPoint}`;
-     
-     
- 	console.log(" PASSO 991: " + this);
-
-     console.log($(this).prev());
-     
-  	$(this).prev().addClass("text-center font-weight-light display-4");
-
-    $.ajax({
-        url: routePoint
-    }).then(function(data) {
-        var $bodyListAllCatalog = $('#bodyListAllCatalog');
-        $bodyListAllCatalog.children().remove();
-        data.forEach((elem) => {
-            var tr = `<tr class='clickable'/>`;
-            $bodyListAllCatalog.append(tr);
-            var tdName = `<td class="pb-0"><i class="fa fa-book" aria-hidden="true">&nbsp;</i>${elem.id}</td>`;
-            var tdType = `<td class="pb-0">${elem.typeCatalog}</td>`;
-            var tdDesc = `<td class="pb-0">${elem.description}</td>`;
-            var tdDtCreated = `<td class="pb-0">${elem.dtCreated}</td>`;
-            $bodyListAllCatalog.children().last().append(tdName, tdType, tdDesc, tdDtCreated);
-        });
-    });
+	$(this).prev("a").addClass("text-center font-weight-light display-4");
 });
 
 //=======================
 //Executa evento no "hide" do collapse element
 $('#toggleListAllCatalog').on('hide.bs.collapse', function () {
- $(this).prev().removeClass("text-center font-weight-light display-4");   
+ $(this).prev("a").removeClass("text-center font-weight-light display-4");   
 });
+//=======================
+
 //=======================
 
 // Executa evento no "show" do collapse element
