@@ -8,122 +8,132 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.recatalog.app.configuration.GitConfiguration;
+import br.com.recatalog.app.model.Catalog;
 import br.com.recatalog.app.service.CatalogService;
+import br.com.recatalog.app.util.BreadCrumbSession;
 import br.com.recatalog.util.PropertyList;
 
 @Controller
-@RequestMapping("recatalog") 
+@RequestMapping("recatalog")
 public class CatalogController {
-	
-	@Autowired
-	private GitConfiguration gitConfig;
-	
+
+	/*
+	 * @Autowired private GitConfiguration gitConfig;
+	 */
+
 	@Autowired
 	private CatalogService catalogService;
 	
+	@Autowired
+	private BreadCrumbSession breadCrumbSession;
+
 	@Value("${urlBase}")
 	private String urlBase;
-	
-	@GetMapping("") 
+
+	@GetMapping("")
 	public String home() {
 		return "index.html";
 	}
-	
-	@GetMapping("/catalog.html") 
+
+	@GetMapping("/catalog.html")
 	public String catalog() {
 		return "catalog.html";
 	}
-	
-	
-	@GetMapping("/defCatalog.html") 
+
+	@GetMapping("/defCatalog.html")
 	public String defCatalog() {
 		return "DefCatalog.html";
 	}
-	
-	@GetMapping("/project.html") 
+
+	@GetMapping("/project.html")
 	public String project() {
 		return "project.html";
 	}
-	
-	@PostMapping("/addCatalog")
-	public String addCatalog(@RequestParam(name = "name") String catName, @RequestParam String description, Model model) {
-		
-//		  CatalogService catalogService;
-		 
-//		  catalogService = new CatalogService();
-		  
-		  PropertyList propertyList = new PropertyList();
-		  
-		  System.out.println("Name: " + catName);
-		  System.out.println("Description: " + description);
 
-		  propertyList.addProperty("NAME", catName);
-		  propertyList.addProperty("DESCRIPTION", description);
-		  
-		  catalogService.addCatalogItem(propertyList);
-		 
-		model.addAttribute("msg", "success");
-		return "catalog.html";
-	}
-	
-	@PostMapping("/defCatalog")
-	public String defCatalog(@RequestParam(name = "catName") String catName, @RequestParam String description, Model model) {
-		
-//		  CatalogService catalogService;
-		 
-//		  catalogService = new CatalogService();
-		  
-		  PropertyList propertyList = new PropertyList();
-		  
-		/*
-		 * System.out.println("Name: " + catName); System.out.println("Description: " +
-		 * description);
-		 */
-		  
-		  if(catName.isEmpty()) return "defCatalog.html";
+	/*
+	 * @PostMapping("/addCatalog") public String addCatalog(@RequestParam(name =
+	 * "name") String catName, @RequestParam String description, Model model) {
+	 * 
+	 * // CatalogService catalogService;
+	 * 
+	 * // catalogService = new CatalogService();
+	 * 
+	 * PropertyList propertyList = new PropertyList();
+	 * 
+	 * System.out.println("Name: " + catName); System.out.println("Description: " +
+	 * description);
+	 * 
+	 * propertyList.addProperty("NAME", catName);
+	 * propertyList.addProperty("DESCRIPTION", description);
+	 * 
+	 * catalogService.addCatalogItem(propertyList);
+	 * 
+	 * model.addAttribute("msg", "success"); return "catalog.html"; }
+	 */
 
-		  propertyList.addProperty("NAME", catName);
-		  propertyList.addProperty("DESCRIPTION", description);
-		  
-		  catalogService.addCatalogItem(propertyList);
-		  
-		  if(propertyList.hasProperty("EXCEPTION")) {
-			  model.addAttribute("msg", "error");
-		  }
-		  else 	model.addAttribute("msg", "success");
-		return "defCatalog.html";
-	}
-	
+	/*
+	 * @PostMapping("/defCatalog") public String defCatalog(@RequestParam(name =
+	 * "catName") String catName, @RequestParam String description, Model model) {
+	 * 
+	 * // CatalogService catalogService;
+	 * 
+	 * // catalogService = new CatalogService();
+	 * 
+	 * PropertyList propertyList = new PropertyList();
+	 * 
+	 * 
+	 * System.out.println("Name: " + catName); System.out.println("Description: " +
+	 * description);
+	 * 
+	 * 
+	 * if(catName.isEmpty()) return "defCatalog.html";
+	 * 
+	 * propertyList.addProperty("NAME", catName);
+	 * propertyList.addProperty("DESCRIPTION", description);
+	 * 
+	 * catalogService.addCatalogItem(propertyList);
+	 * 
+	 * if(propertyList.hasProperty("EXCEPTION")) { model.addAttribute("msg",
+	 * "error"); } else model.addAttribute("msg", "success"); return
+	 * "defCatalog.html"; }
+	 */
+
 	@PostMapping("/createCatalog")
-	public String createCatalog(@RequestParam(name = "catalogName") String cataLogName, @RequestParam String description, Model model) {
-		  PropertyList propertyList = new PropertyList();
-		  
-		  if(cataLogName.isEmpty()) return "catalog.html";
+	public String createCatalog(@RequestParam(name = "catalogName") String cataLogName,
+			@RequestParam String description, Model model) {
+		PropertyList propertyList = new PropertyList();
 
-		  propertyList.addProperty("NAME", cataLogName);
-		  propertyList.addProperty("DESCRIPTION", description);
-		  
-		  catalogService.addCatalogItem(propertyList);
-		  
-		  if(propertyList.hasProperty("EXCEPTION")) {
-			  model.addAttribute("msg", "error");
-		  }
-		  else 	model.addAttribute("msg", "success");
+		if (cataLogName.isEmpty())
+			return "catalog.html";
+
+		propertyList.addProperty("NAME", cataLogName);
+		propertyList.addProperty("DESCRIPTION", description);
+
+		catalogService.addCatalogItem(propertyList);
+
+		if (propertyList.hasProperty("EXCEPTION")) {
+			model.addAttribute("msg", "error");
+		} else {
+			model.addAttribute("msg", "success");
+			
+			Catalog createdCatalog = (Catalog) propertyList.getProperty("ENTITY");
+			breadCrumbSession.clearCatalog();
+			breadCrumbSession.setCatalogId(createdCatalog.getId());
+			breadCrumbSession.setCatalogName(createdCatalog.getName());
+		}
 		return "catalog.html";
 	}
-	
-	@GetMapping("/catalogs") 
+
+	@GetMapping("/catalogs")
 	public String listCatalogs(Model model) {
-	model.addAttribute("catalogs", catalogService.listAllCatalogItens());
+		model.addAttribute("catalogs", catalogService.listAllCatalogItens());
 		return "catalog.html";
 	}
-	
-	@GetMapping("/catalogsx") 
-	public String listAllCatalogs(Model model) {
-	model.addAttribute("catalogs", catalogService.listAllCatalogItens());
-		return "listAllCatalogs.html";
-	}
+
+	/*
+	 * @GetMapping("/catalogsx") public String listAllCatalogs(Model model) {
+	 * model.addAttribute("catalogs", catalogService.listAllCatalogItens()); return
+	 * "listAllCatalogs.html"; }
+	 */
 }
