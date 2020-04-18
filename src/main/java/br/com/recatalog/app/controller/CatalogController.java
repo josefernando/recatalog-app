@@ -28,8 +28,8 @@ public class CatalogController {
 	@Autowired
 	private BreadCrumbSession breadCrumbSession;
 
-	@Value("${urlBase}")
-	private String urlBase;
+//	@Value("${urlBase}")
+//	private String urlBase;
 
 	@GetMapping("")
 	public String home() {

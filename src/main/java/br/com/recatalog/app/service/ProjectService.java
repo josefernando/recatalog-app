@@ -4,14 +4,11 @@ import java.io.IOException;
 
 import org.eclipse.jgit.lib.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import br.com.recatalog.app.configuration.DataSourceConfiguration;
 import br.com.recatalog.app.configuration.GitConfiguration;
-import br.com.recatalog.app.dao.ProjectDAO;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.SourceRepository;
 import br.com.recatalog.util.GitSourceManagement;
 import br.com.recatalog.util.PropertyList;
 
@@ -26,17 +23,10 @@ public class ProjectService {
 	@Autowired
 	private DataSourceConfiguration dataSourceConfig;
 	
-	@Autowired
-	private CatalogService catalogService;
+	@Value("${recatalog.git.urlbase}") // recupera valor do arquivo application.properties
+	private String gitUrlBase;
 	
-	@Autowired
-//	@Qualifier("${dataSourceConfig.dao}")
-	@Qualifier("ProjectDAOHibernate")
-
-	private ProjectDAO projectDAO;
-	
-	public void addProject(PropertyList properties) throws IOException {
-		
+	public void createProject(PropertyList properties) throws IOException {
 		String projectName = (String)properties.mustProperty("PROJECT_NAME");
 		String projectDesc = (String)properties.mustProperty("PROJECT_DESC");
 		String catalogName = (String)properties.mustProperty("CATALOG_NAME");
@@ -47,10 +37,12 @@ public class ProjectService {
 		catalogName = catalogName.toUpperCase();
 		
 /* 		gitConfig.getUrlBase() == "${gitConfig.url}"
+ *               ou
 		String repoDir = gitConfig.getUrlBase() + System.getProperty("file.separator") + catalogName
 		       + System.getProperty("file.separator") + projectName;
 */		
-		String repoDir = "${gitConfig.url}" + System.getProperty("file.separator") + catalogName
+		
+		String repoDir = gitUrlBase + System.getProperty("file.separator") + catalogName
 			       + System.getProperty("file.separator") + projectName;
 		
 		Repository repo = GitSourceManagement.init(repoDir);

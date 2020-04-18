@@ -28,6 +28,8 @@ $(".alert").remove();
 //====================================================================
 $('#toggleCreateCatalog').on('show.bs.collapse', function () {
  	$(this).prev("a").addClass("text-center font-weight-light display-4");
+ 	
+ 	console.log(this);
 
 });
 
@@ -37,14 +39,25 @@ $('#toggleCreateCatalog').on('hide.bs.collapse', function () {
 });
 //=====================================================================
 
+$('#toggleCreateProject').on('show.bs.collapse', function () {
+ 	$(this).prev("a").addClass("text-center font-weight-light display-4");
+ 	console.log(this);
+});
+
+$('#toggleCreateProject').on('hide.bs.collapse', function () {
+	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
+	$(".alert").remove();
+});
+//=====================================================================
+
 // Executa evento no "show" do collapse element
-$('#toggleListAllCatalog').on('show.bs.collapse', function () {
+$('#toggleListAllCatalog, #toggleListAllProject').on('show.bs.collapse', function () {
 	$(this).prev("a").addClass("text-center font-weight-light display-4");
 });
 
 //=======================
 //Executa evento no "hide" do collapse element
-$('#toggleListAllCatalog').on('hide.bs.collapse', function () {
+$('#toggleListAllCatalog, #toggleListAllProject').on('hide.bs.collapse', function () {
  $(this).prev("a").removeClass("text-center font-weight-light display-4");   
 });
 //=======================
