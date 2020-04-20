@@ -1,16 +1,28 @@
 package br.com.recatalog.app.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.recatalog.app.Exception.GlobalExceptionController;
 import br.com.recatalog.app.model.Project;
 import br.com.recatalog.app.service.ProjectService;
 import br.com.recatalog.app.util.BreadCrumbSession;
@@ -19,6 +31,8 @@ import br.com.recatalog.util.PropertyList;
 @Controller
 @RequestMapping("recatalog")
 public class ProjectController {
+	
+	private Logger logger = LoggerFactory.getLogger(GlobalExceptionController.class);
 	
 	@Autowired
 	private ProjectService projectService;
@@ -71,5 +85,20 @@ public class ProjectController {
 			breadCrumbSession.setProjectName(projectName);
 		}
 		return mav;
+	}
+	
+	@ExceptionHandler(IllegalStateException.class)
+	public String repositoryExistsException(IllegalStateException e, HttpServletRequest request, RedirectAttributes redirectAttrs){
+
+		StringWriter exceptionStackError = new StringWriter();
+		e.printStackTrace(new PrintWriter(exceptionStackError));
+		
+		logger.error("ERROR ON URL: " + request.getRequestURL());
+		logger.error( exceptionStackError.toString());
+		
+		redirectAttrs.addFlashAttribute("error", e);
+	    redirectAttrs.addFlashAttribute("msg", "error");
+	    
+	    return "redirect:project.html";
 	}
 }

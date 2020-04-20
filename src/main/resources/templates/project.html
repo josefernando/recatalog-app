@@ -24,7 +24,7 @@
 		         
 		         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
 		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
-		             	<p class=" mb-0 ">Falha Na Criação Do Projeto</p>
+		             	<p class=" mb-0 " th:text="${error.getMessage()}">Falha Na Criação Do Projeto</p>
 		         </div>
 		         
 	             <form id="formCreateProject" class="needs-validation" novalidate action="/recatalog/projects" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >

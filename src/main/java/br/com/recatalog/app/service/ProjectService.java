@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.recatalog.app.configuration.DataSourceConfiguration;
 import br.com.recatalog.app.configuration.GitConfiguration;
+import br.com.recatalog.app.repository.CatalogRepository;
 import br.com.recatalog.util.GitSourceManagement;
 import br.com.recatalog.util.PropertyList;
 
@@ -18,6 +19,9 @@ public class ProjectService {
 	@SuppressWarnings("unused")
 	@Autowired
 	private GitConfiguration gitConfig;
+	
+	@Autowired
+	CatalogRepository catalogRepository;
 	
 	@SuppressWarnings("unused")
 	@Autowired
@@ -30,7 +34,6 @@ public class ProjectService {
 		String projectName = (String)properties.mustProperty("PROJECT_NAME");
 		String projectDesc = (String)properties.mustProperty("PROJECT_DESC");
 		String catalogName = (String)properties.mustProperty("CATALOG_NAME");
-		
 
 		// todos os nomes do catálogo  são case-sensitive
 		projectName = projectName.toUpperCase();
@@ -45,6 +48,8 @@ public class ProjectService {
 		String repoDir = gitUrlBase + System.getProperty("file.separator") + catalogName
 			       + System.getProperty("file.separator") + projectName;
 		
+		
+		// throw IllegalStateException para repositórios já existentes
 		Repository repo = GitSourceManagement.init(repoDir);
 		
 		System.out.println(repo.getDirectory().getCanonicalPath());
@@ -63,4 +68,5 @@ public class ProjectService {
 		 * catalogService.addCatalogItem(propertyList);
 		 */
 	}
+
 }
