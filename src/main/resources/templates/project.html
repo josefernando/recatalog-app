@@ -58,7 +58,7 @@
             <a th:if = "${projects != null }" class="nav-link text-center font-weight-light display-4" href="#toggleListAllProject" data-toggle="collapse"  data-target="#toggleListAllProject" aria-expanded="true">Listar Projetos</a>
             <a th:if = "${projects == null }" class="nav-link" href="/recatalog/projects"> Listar Projetos</a>
 
-            <div id= "toggleListAllProject" class="collapse" th:classappend="${projects != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 500px; margin: auto">            
+            <div id= "toggleListAllProject" class="collapse" th:classappend="${projects != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
 				<p class="small text-center">Lista de Projetos</p>
 				
 				<div th:if="${not #lists.isEmpty(projects)}">
@@ -73,7 +73,7 @@
 		                </thead>
 		                <tbody id="bodyListAllProject">
 		                    <tr th:each="project : ${projects}">
-		                        <td class="pb-0" th:text="${project.catalogName}"></td>
+		                        <td class="pb-0" th:text="${project.getParent().getName()}"></td>
 		                        <td class="pb-0 clickable re-to-breadcrumb-project" th:text="${project.name}"></td>
 		                        <td class="pb-0" th:text="${project.description}"></td>
 		                        <td class="pb-0" th:text="${project.createdOn}"></td>

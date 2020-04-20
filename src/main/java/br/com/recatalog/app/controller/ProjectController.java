@@ -6,7 +6,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -22,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.recatalog.app.Exception.DuplicatedCatalogItemException;
 import br.com.recatalog.app.Exception.GlobalExceptionController;
+import br.com.recatalog.app.Exception.ParentCatalogItemNotFoundException;
 import br.com.recatalog.app.model.Project;
 import br.com.recatalog.app.service.ProjectService;
 import br.com.recatalog.app.util.BreadCrumbSession;
@@ -86,6 +87,12 @@ public class ProjectController {
 		}
 		return mav;
 	}
+
+	@GetMapping("/projects")
+	public String listCatalogs(Model model) {
+		model.addAttribute("projects", projectService.listAllProjects());
+		return "project.html";
+	}
 	
 	@ExceptionHandler(IllegalStateException.class)
 	public String repositoryExistsException(IllegalStateException e, HttpServletRequest request, RedirectAttributes redirectAttrs){
@@ -101,4 +108,49 @@ public class ProjectController {
 	    
 	    return "redirect:project.html";
 	}
+	
+	@ExceptionHandler(DuplicatedCatalogItemException.class)
+	public String duplicatedCatalogItemException(Exception e, HttpServletRequest request, RedirectAttributes redirectAttrs){
+
+		StringWriter exceptionStackError = new StringWriter();
+		e.printStackTrace(new PrintWriter(exceptionStackError));
+		
+		logger.error("ERROR ON URL: " + request.getRequestURL());
+		logger.error( exceptionStackError.toString());
+		
+		redirectAttrs.addFlashAttribute("error", e);
+	    redirectAttrs.addFlashAttribute("msg", "error");
+	    
+	    return "redirect:project.html";
+	}
+	
+	@ExceptionHandler(ParentCatalogItemNotFoundException.class)
+	public String parentCatalogItemNotFoundException(Exception e, HttpServletRequest request, RedirectAttributes redirectAttrs){
+
+		StringWriter exceptionStackError = new StringWriter();
+		e.printStackTrace(new PrintWriter(exceptionStackError));
+		
+		logger.error("ERROR ON URL: " + request.getRequestURL());
+		logger.error( exceptionStackError.toString());
+		
+		redirectAttrs.addFlashAttribute("error", e);
+	    redirectAttrs.addFlashAttribute("msg", "error");
+	    
+	    return "redirect:project.html";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public String generalException(Exception e, HttpServletRequest request, RedirectAttributes redirectAttrs){
+
+		StringWriter exceptionStackError = new StringWriter();
+		e.printStackTrace(new PrintWriter(exceptionStackError));
+		
+		logger.error("ERROR ON URL: " + request.getRequestURL());
+		logger.error( exceptionStackError.toString());
+		
+		redirectAttrs.addFlashAttribute("error", e);
+	    redirectAttrs.addFlashAttribute("msg", "error");
+	    
+	    return "redirect:project.html";
+	}	
 }
