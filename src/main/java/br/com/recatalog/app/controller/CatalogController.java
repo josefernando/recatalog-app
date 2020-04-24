@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.com.recatalog.app.model.Catalog;
+import br.com.recatalog.app.model.domain.Catalog;
 import br.com.recatalog.app.service.CatalogService;
 import br.com.recatalog.app.util.BreadCrumbSession;
 import br.com.recatalog.util.PropertyList;

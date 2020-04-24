@@ -1,6 +1,6 @@
 package br.com.recatalog.app.dao;
 
-import br.com.recatalog.app.model.PropertyCatalog;
+import br.com.recatalog.app.model.domain.PropertyCatalog;
 
 public interface PropertyCatalogDAO {
 

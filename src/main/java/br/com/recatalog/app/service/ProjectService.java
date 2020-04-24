@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.recatalog.app.Exception.DuplicatedCatalogItemException;
 import br.com.recatalog.app.Exception.ParentCatalogItemNotFoundException;
-import br.com.recatalog.app.configuration.DataSourceConfiguration;
 import br.com.recatalog.app.configuration.GitConfiguration;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.Project;
-import br.com.recatalog.app.repository.CatalogRepository;
-import br.com.recatalog.app.repository.ProjectRepository;
+import br.com.recatalog.app.domain.repository.CatalogRepository;
+import br.com.recatalog.app.domain.repository.ProjectRepository;
+import br.com.recatalog.app.model.domain.CatalogItem;
+import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.util.GitSourceManagement;
 import br.com.recatalog.util.PropertyList;
 
@@ -34,9 +33,9 @@ public class ProjectService {
 	@Autowired
 	ProjectRepository projectRepository;
 	
-	@SuppressWarnings("unused")
-	@Autowired
-	private DataSourceConfiguration dataSourceConfig;
+//	@SuppressWarnings("unused")
+//	@Autowired
+//	private DataSourceConfiguration dataSourceConfig;
 	
 	@Value("${recatalog.git.urlbase}") // recupera valor do arquivo application.properties
 	private String gitUrlBase;

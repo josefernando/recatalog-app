@@ -7,10 +7,10 @@ import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import br.com.recatalog.app.model.Catalog;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.PropertyCatalog;
-import br.com.recatalog.app.model.SourceRepository;
+import br.com.recatalog.app.model.domain.Catalog;
+import br.com.recatalog.app.model.domain.CatalogItem;
+import br.com.recatalog.app.model.domain.PropertyCatalog;
+import br.com.recatalog.app.model.domain.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
 @Component("CatalogDAOHibernate")

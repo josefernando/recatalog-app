@@ -1,4 +1,4 @@
-package br.com.recatalog.app.model;
+package br.com.recatalog.app.model.domain;
 
 import java.io.Serializable;
 
@@ -72,6 +72,9 @@ public class PropertyCatalog implements Serializable {
 			return false;
 		return true;
 	}
+
+	
+	
 }
 
 @Embeddable

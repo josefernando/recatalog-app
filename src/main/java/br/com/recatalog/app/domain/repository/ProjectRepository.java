@@ -1,9 +1,9 @@
-package br.com.recatalog.app.repository;
+package br.com.recatalog.app.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.recatalog.app.model.Project;
+import br.com.recatalog.app.model.domain.Project;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project,String> {

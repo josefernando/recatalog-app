@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import br.com.recatalog.app.dao.CatalogDAO;
 import br.com.recatalog.app.dao.CatalogDAOHibernate;
-import br.com.recatalog.app.model.Catalog;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.model.PropertyCatalog;
-import br.com.recatalog.app.model.SourceRepository;
+import br.com.recatalog.app.model.domain.Catalog;
+import br.com.recatalog.app.model.domain.CatalogItem;
+import br.com.recatalog.app.model.domain.PropertyCatalog;
+import br.com.recatalog.app.model.domain.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernateTest {

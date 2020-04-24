@@ -1,4 +1,4 @@
-package br.com.recatalog.app.model;
+package br.com.recatalog.app.model.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

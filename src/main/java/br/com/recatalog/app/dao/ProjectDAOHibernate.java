@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import br.com.recatalog.app.model.Project;
+import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.util.PropertyList;
 
 @Component("ProjectDAOHibernate")

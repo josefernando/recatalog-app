@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.recatalog.app.Exception.DuplicatedCatalogItemException;
 import br.com.recatalog.app.Exception.GlobalExceptionController;
 import br.com.recatalog.app.Exception.ParentCatalogItemNotFoundException;
-import br.com.recatalog.app.model.Project;
+import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.app.service.ProjectService;
 import br.com.recatalog.app.util.BreadCrumbSession;
 import br.com.recatalog.util.PropertyList;

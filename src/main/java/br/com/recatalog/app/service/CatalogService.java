@@ -12,12 +12,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import br.com.recatalog.app.configuration.DataSourceConfiguration;
 import br.com.recatalog.app.dao.CatalogDAO;
 import br.com.recatalog.app.dao.CatalogDAOHibernate;
-import br.com.recatalog.app.model.Catalog;
-import br.com.recatalog.app.model.CatalogItem;
-import br.com.recatalog.app.repository.CatalogRepository;
+import br.com.recatalog.app.domain.repository.CatalogRepository;
+import br.com.recatalog.app.model.domain.Catalog;
+import br.com.recatalog.app.model.domain.CatalogItem;
 import br.com.recatalog.util.PropertyList;
 
 @Service
@@ -37,7 +36,7 @@ public class CatalogService {
 //	@Autowired
 ////	@Qualifier("${dataSourceConfig.dao}")
 //	@Resource(name = "CatalogDAO" + "${dao}")
-	CatalogDAO catalogDAO;
+//	CatalogDAO catalogDAO;
 	
 	PropertyList propertyList;
 
@@ -59,7 +58,7 @@ public class CatalogService {
 	*/
 	
 	public PropertyList addCatalogItem(PropertyList propertyList) {
-		catalogDAO = new CatalogDAOHibernate();		
+//		catalogDAO = new CatalogDAOHibernate();		
 		
 //		CatalogItem catalog = new Catalog();
 		Catalog catalog = new Catalog();
