@@ -9,12 +9,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity   // specialized bean that brings an auth object
 public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
-	
+
+/*
+ * In Memory Configuration
+ */	
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //
@@ -28,6 +32,9 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 //			.roles("ADMIN");
 //	}
 	
+/*
+ * JDBC Configuration
+ */	
 	@Autowired
     @Qualifier("securityDataSource") // "securityDataSource" is defined in "SecurityDataSourcesConfig" file as a @Bean name
 	DataSource jdbcDataSource;
@@ -37,7 +44,18 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 
 		auth.jdbcAuthentication()
 			.dataSource(jdbcDataSource);
-	}	
+	}
+	
+//	UserDetailsService customUserDetailsService;
+//
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//		auth.userDetailsService(customUserDetailsService)
+//	}	
+	
+	
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
