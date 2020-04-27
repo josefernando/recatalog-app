@@ -29,6 +29,10 @@ public class CustomGrantedAuthority implements GrantedAuthority, Serializable{
 		this.customGrantedAuthorityId = new CustomGrantedAuthorityId(userDetails, authority);
 	}
 	
+	public CustomGrantedAuthority (String username, String authority) {
+		this.customGrantedAuthorityId = new CustomGrantedAuthorityId(new CustomUserDetails(username), authority);
+	}
+	
 	public CustomGrantedAuthorityId getCustomGrantedAuthorityId() {
 		return customGrantedAuthorityId;
 	}

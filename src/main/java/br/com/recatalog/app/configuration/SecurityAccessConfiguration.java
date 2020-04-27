@@ -35,27 +35,25 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 /*
  * JDBC Configuration
  */	
-	@Autowired
-    @Qualifier("securityDataSource") // "securityDataSource" is defined in "SecurityDataSourcesConfig" file as a @Bean name
-	DataSource jdbcDataSource;
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.jdbcAuthentication()
-			.dataSource(jdbcDataSource);
-	}
-	
-//	UserDetailsService customUserDetailsService;
-//
+//	@Autowired
+//    @Qualifier("securityDataSource") // "securityDataSource" is defined in "SecurityDataSourcesConfig" file as a @Bean name
+//	DataSource jdbcDataSource;
+//	
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //
-//		auth.userDetailsService(customUserDetailsService)
-//	}	
+//		auth.jdbcAuthentication()
+//			.dataSource(jdbcDataSource);
+//	}
 	
-	
-	
+	@Autowired
+	UserDetailsService customUserDetailsService;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		auth.userDetailsService(customUserDetailsService);
+	}	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
