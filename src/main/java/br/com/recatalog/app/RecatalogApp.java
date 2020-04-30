@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.recatalog.app.domain.repository.CatalogRepository;
 import br.com.recatalog.app.model.userdetails.CustomGrantedAuthority;
 import br.com.recatalog.app.model.userdetails.CustomUserDetails;
+import br.com.recatalog.app.security.auth.repository.AccountRepository;
+import br.com.recatalog.app.security.auth.repository.PermissionRepository;
 import br.com.recatalog.app.security.repository.SpringUsersRepository;
 import br.com.recatalog.app.userdetails.repository.CustomGrantedAuthorityRepository;
 import br.com.recatalog.app.userdetails.repository.CustomUserDetailsRepository;
@@ -27,6 +29,9 @@ public class RecatalogApp {
 	CatalogRepository catalogRepository;
 	
 	@Autowired
+	AccountRepository accountRepository;
+	
+	@Autowired
 	SpringUsersRepository usersRepository;
 	
 	@Autowired
@@ -35,10 +40,16 @@ public class RecatalogApp {
 	@Autowired
 	CustomGrantedAuthorityRepository customGrantedAuthorityRepository;
 	
+	@Autowired
+	PermissionRepository permissionRepository;
+	
 	@PostConstruct
 	void init() {
 		System.out.println("cats:" + catalogRepository.findAll());
 		System.out.println("users:" + usersRepository.findAll());	
+		
+		System.out.println("accounts:" + accountRepository.findAll());	
+		System.out.println("permission:" + permissionRepository.findAll());	
 //		List<CustomUserDetails> cud = userDetailsRepository.findAll();
 //		CustomUserDetails item = cud.get(0);
 //		System.out.println("user details:" + cud.get(0).getUsername());	
