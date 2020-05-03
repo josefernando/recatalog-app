@@ -56,6 +56,19 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-thymeleaf</artifactId>
 	</dependency>
+	
+	<!-- youtube: romanian coder 
+	     https://www.youtube.com/watch?v=pOMns4h5fQg&list=PLVApX3evDwJ1d0lKKHssPQvzv2Ao3e__Q&index=26
+	     Spring Security Thymeleaf Integration
+	 -->
+	<dependency>
+		<groupId>org.thymeleaf.extras</groupId>
+		<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+	</dependency>	 
+	<dependency>
+		<groupId>org.thymeleaf.extras</groupId>
+		<artifactId>thymeleaf-extras-java8time</artifactId>
+	</dependency>
 
     <!-- Incluido para suportar @Controller html response  -->
 	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->

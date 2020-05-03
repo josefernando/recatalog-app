@@ -35,7 +35,10 @@
 		                    <li class="nav-item">
 		                        <a class="nav-link " href="/recatalog/project.html">Projeto</a>
 		                    </li> 
-		                    <li class="nav-item">
+           <!-- Common built-in expressions
+           https://docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html
+            -->
+		                    <li sec:authorize="isAuthenticated()" class="nav-item">
 		                        <a class="nav-link " href="#">Configuração</a>
 		                    </li>
 		                    <li class="nav-item">
@@ -47,7 +50,7 @@
 		                        <a class="nav-link " href="#">Tutorial</a>
 		                    </li>
 		                    <li class="nav-item">
-		                        <a class="nav-link " href="#">Segurança</a>
+		                        <a class="nav-link " href="#">Controle de Acesso</a>
 		                    </li> 
 		                    <li class="nav-item">
 		                        <a class="nav-link clickable" href="#re-modal-login" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Login</a>
