@@ -14,9 +14,9 @@
 		    <link rel="stylesheet" href="/webjars/bootstrap-select/bootstrap-select.min.css">
 		    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css">
 		    <link rel="stylesheet" href="/css/custom/main.css">
-		    
-		    <title>Recatalog</title>
-		    
+		    <!--  put in each page
+		    	<title>Recatalog</title>
+		    -->
 	 	<style>
 			.re-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
 			  content: ">";
@@ -52,9 +52,22 @@
 		                    <li class="nav-item">
 		                        <a class="nav-link clickable" href="#re-modal-login" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Login</a>
 		                        <!-- or button
-		                        <button class="btn btn-link" data-target="#loginModal" data-toggle="modal"><i class="fas fa-sign-in-alt"></i> Entrar</a>
+		                        <button class="btn btn-link" data-target="#loginModal" data-toggle="modal"><i class="fas fa-sign-out-alt"></i> Entrar</a>
 		                        -->
 		                    </li>
+		                    <li class="nav-item">
+                <!-- 
+                	ref.: https://www.youtube.com/watch?v=jgn-D271qWA&list=PLVApX3evDwJ1d0lKKHssPQvzv2Ao3e__Q&index=23
+			                   Em ...'th:action="@{/logout}"', não existe o endpoint "/login".
+			                   Na verdade, spring security framework intercepta oa ação e a trata.
+			                   É necessário configurar ...
+			                    			'.formLogin().loginPage("/logout")'
+			                   em "SecurityAccessConfigurarion"  			
+                 -->
+								<form id="form-logout"class="form-inline" form-method="post" th:action="@{/logout}">
+									<button class="btn btn-link" type="submit"> Sair</button> 
+								</form>
+		                    </li>		                    
 		                </ul>
 		        </div>
 		    </nav>	

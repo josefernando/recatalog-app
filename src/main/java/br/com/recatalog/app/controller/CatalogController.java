@@ -35,6 +35,11 @@ public class CatalogController {
 	public String home() {
 		return "index.html";
 	}
+	
+	@PostMapping("/index")
+	public String index() {
+		return "index.html";
+	}
 
 	@GetMapping("/catalog.html")
 	public String catalog() {

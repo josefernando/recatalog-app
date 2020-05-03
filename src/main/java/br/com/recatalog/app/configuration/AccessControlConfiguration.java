@@ -12,12 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity   // specialized bean that brings an auth object
-public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
+public class AccessControlConfiguration extends WebSecurityConfigurerAdapter{
 
 /*
- * In Memory Configuration
+ * In Memory Authentication 
  */	
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,7 +35,7 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 //	}
 	
 /*
- * JDBC Configuration
+ * JDBC DAO
  */	
 //	@Autowired
 //    @Qualifier("securityDataSource") // "securityDataSource" is defined in "SecurityDataSourcesConfig" file as a @Bean name
@@ -46,6 +48,9 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 //			.dataSource(jdbcDataSource);
 //	}
 	
+//***	
+// UserDetailsService 
+//***	
 	@Autowired
 	UserDetailsService customUserDetailsService;
 
@@ -62,7 +67,12 @@ public class SecurityAccessConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers("/recatalog/catalogs/**").hasAnyRole("ADMIN", "USER")
 			.antMatchers("/recatalog").permitAll()
 			.antMatchers("/").permitAll()
-			.and().formLogin();
+			.and()
+			.formLogin().loginPage("/login").permitAll()
+		    .and()
+		    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//		    	.logoutSuccessUrl("/recatalog");		
+		    	.logoutSuccessUrl("/recatalog");		    	
 	}
 	
 	@Bean
