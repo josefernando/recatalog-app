@@ -12,9 +12,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.recatalog.app.domain.repository.CatalogRepository;
 import br.com.recatalog.app.model.userdetails.CustomGrantedAuthority;
 import br.com.recatalog.app.model.userdetails.CustomUserDetails;
+import br.com.recatalog.app.security.auth.model.Account;
 import br.com.recatalog.app.security.auth.repository.AccountRepository;
 import br.com.recatalog.app.security.auth.repository.PermissionRepository;
 import br.com.recatalog.app.security.repository.SpringUsersRepository;
+import br.com.recatalog.app.service.AccountService;
 import br.com.recatalog.app.userdetails.repository.CustomGrantedAuthorityRepository;
 import br.com.recatalog.app.userdetails.repository.CustomUserDetailsRepository;
 
@@ -43,6 +45,10 @@ public class RecatalogApp {
 	@Autowired
 	PermissionRepository permissionRepository;
 	
+	@Autowired
+	AccountService accountService;
+	
+	
 	@PostConstruct
 	void init() {
 		System.out.println("cats:" + catalogRepository.findAll());
@@ -61,6 +67,15 @@ public class RecatalogApp {
 		
 		CustomGrantedAuthority cga = item.getGrantedAuthorities().get(0);
 		System.out.println("first size:" + cga.getAuthority());	
+		
+		Account account = accountService.findById("user");
+		
+		if(account != null) {
+			System.out.println(account.getPermissions());
+		}
+		else {
+			System.out.println("Account is null");
+		}
 		
 //		CustomGrantedAuthority cda1 = new CustomGrantedAuthority("admin", "ROLE_USER");
 //		

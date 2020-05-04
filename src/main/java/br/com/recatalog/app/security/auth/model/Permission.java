@@ -112,4 +112,9 @@ public class Permission implements Serializable, Persistable {
 	public boolean isNew() {
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Permission [permissionId=" + permissionId + "]";
+	}
 }

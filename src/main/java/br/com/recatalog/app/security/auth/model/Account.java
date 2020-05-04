@@ -30,20 +30,20 @@ public class Account implements Serializable, Persistable {
 	private String password;
 
 	@Column(name = "enabled")
-	private boolean enabled;
+	private boolean enabled = true;
 
 	@Column(name = "account_expired")
-	private boolean accountExpired;
+	private boolean accountExpired = false;
 
 	@Column(name = "credentials_expired")
-	private boolean credentialsExpired;
+	private boolean credentialsExpired = false;
 
 	@Column(name = "account_locked")
-	private boolean accountLocked;
+	private boolean accountLocked = false;
 
 	@ManyToMany(
 			fetch = FetchType.EAGER,
-			cascade = CascadeType.PERSIST)
+			cascade = CascadeType.PERSIST) // why not CascadeType.ALL. See at Google!S
 		@JoinTable(
 				name = "tbaccount_permission",
 					joinColumns = @JoinColumn(
@@ -106,7 +106,7 @@ public class Account implements Serializable, Persistable {
 		return credentialsExpired;
 	}
 
-	public void setCredentialsNonExpired(boolean credentialsExpired) {
+	public void setCredentialsExpired(boolean credentialsExpired) {
 		this.credentialsExpired = credentialsExpired;
 	}
 
@@ -114,18 +114,12 @@ public class Account implements Serializable, Persistable {
 		return accountLocked;
 	}
 
-	public void setAccountNonLocked(boolean accountLocked) {
+	public void setAccountLocked(boolean accountLocked) {
 		this.accountLocked = accountLocked;
 	}
-	
-	
 
 	public boolean isCredentialsExpired() {
 		return credentialsExpired;
-	}
-
-	public void setCredentialsExpired(boolean credentialsExpired) {
-		this.credentialsExpired = credentialsExpired;
 	}
 
 	public Set<Permission> getPermissions() {
@@ -138,10 +132,6 @@ public class Account implements Serializable, Persistable {
 
 	public void setUserFullName(String userFullName) {
 		this.userFullName = userFullName;
-	}
-
-	public void setAccountLocked(boolean accountLocked) {
-		this.accountLocked = accountLocked;
 	}
 
 	/* IMPORTANTE: implements PERSITABLE para pegar (catch) "duplicate key"

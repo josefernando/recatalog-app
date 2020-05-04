@@ -7,5 +7,4 @@ import br.com.recatalog.app.security.auth.model.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,String> {
-	
 }

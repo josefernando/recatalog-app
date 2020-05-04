@@ -53,11 +53,16 @@ public class AccessControlConfiguration extends WebSecurityConfigurerAdapter{
 //***	
 	@Autowired
 	UserDetailsService customUserDetailsService;
+	
+	@Autowired
+	UserDetailsService accountDetailsService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.userDetailsService(customUserDetailsService);
+//		auth.userDetailsService(customUserDetailsService);
+		auth.userDetailsService(accountDetailsService);
+
 	}	
 	
 	@Override
