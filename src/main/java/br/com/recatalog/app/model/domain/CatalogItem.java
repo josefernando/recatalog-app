@@ -23,7 +23,7 @@ import org.springframework.data.domain.Persistable;
 @Entity
 @Table(name = "TBCATALOG_ITEM")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class CatalogItem implements Serializable, Persistable{
+public class CatalogItem implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 	
 	public CatalogItem() {
@@ -154,9 +154,5 @@ public class CatalogItem implements Serializable, Persistable{
 	@Override
 	public boolean isNew() {
 		return true;
-	}
-
-
-	
-	
+	}	
 }

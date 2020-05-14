@@ -86,7 +86,54 @@
 					<h2> Não há Projetos criados</h2>
 				</div>
 		</div>
-	<!------------------------------------------------------------------------------------------>            
+	<!------------------------------------------------------------------------------------------>  
+        <hr class="my-0">
+
+            <!-- a  class="nav-link" href="#toggleGenSymbolTable" data-toggle="collapse" aria-expanded="false" data-target="#toggleGenSymbolTable">Gerar Tabela de Símbolos</a-->
+            <a th:if = "${versions != null }" class="nav-link text-center font-weight-light display-4" href="#toggleVersionProject" data-toggle="collapse"  data-target="#toggleVersionProject" aria-expanded="true">Nova Versão</a>
+            <a th:if = "${versions == null }" class="nav-link" href="#toggleVersionProject" data-toggle="collapse" data-target="#toggleVersionProject" aria-expanded="false" >Nova Versão</a>
+
+            <div id="toggleVersionProject" class="collapse toggleSubMenu" th:classappend="${versions != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
+				<p class="small text-center">Nova Versão</p>
+	            <form id="formVersionProject" class="needs-validation" novalidate action="/recatalog/versions" method="post" enctype="multipart/form-data" style="width: 400px; margin: auto" >
+                     <div class="form-group">
+                       	<div class="custom-file">
+	                        <label class="custom-file-label" for="fileUpload">Escolha os Arquivos</label>
+	                        <input type="file" name="files" class="custom-file-input form-control form-control-sm input-files cursor-pointer" multiple id="fileUpload">
+						</div>
+                    </div>
+                    <div class="form-group">
+                    	<div class="custom-file">
+	                        <label class="custom-file-label" for="dirUpload">Escolha o Diretório</label >
+	                        <input type="file" name="files" class="custom-file-input form-control form-control-sm input-files cursor-pointer" webkitdirectory directory id="dirUpload">
+ 						</div>
+                    </div>
+                    <div class="form-group d-none" id="ra-wrap-symbols">
+                        <div class="form-group">
+                            <!--IMPORTANTE USE selectpicker plugin v1.13.9 , funciona com boostrap 4-->
+                            <select id="ra-symbols-options" class="selectpicker pathParam" data-live-search="true" name="symbol-list"
+                            data-width="100%" >
+                                <!--
+                                <option value=" ">Escolha um símbolo...</option>
+                                <option value="FINANCEIRO">FINANCEIRO</option>
+                                -->
+                            </select>
+                        </div>
+                    </div>                
+                    <div class="form-group" id="ra-wrap-msgDiv-component">
+                    </div>
+                    <div class="ra-wrap-submit">        
+                        <div class="form-group">
+                            <input class="form-control form-control-sm btn-primary btn-submit cursor-pointer"  type="submit" value="Enviar" /> 
+                        </div>
+                        <div class="form-group progress mt-2 d-none">
+                            <div class="progress-bar bg-sucess progress-bar-striped progress-bar-animated "
+                            style="width: 100%">Executando...</div>
+                        </div>
+                	</div>
+                </form>
+            </div>
+	<!------------------------------------------------------------------------------------------>        
         </div>
     </div>    
 
@@ -127,7 +174,7 @@
 	});
 </script>
 <script>  
-//Não funciona a mesma funcções no javascript handlers.js
+//Não funciona a mesma funções no javascript handlers.js
 $('#toggleCreateProject').on('show.bs.collapse', function () {
  	$(this).prev("a").addClass("text-center font-weight-light display-4");
  	console.log(this);
@@ -136,6 +183,16 @@ $('#toggleCreateProject').on('show.bs.collapse', function () {
 $('#toggleCreateProject').on('hide.bs.collapse', function () {
 	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
 	$(".alert").remove();
+});
+
+$('.toggleSubMenu').on('hide.bs.collapse', function () {
+	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
+	$(".alert").remove();
+});
+
+$('.toggleSubMenu').on('show.bs.collapse', function () {
+ 	$(this).prev("a").addClass("text-center font-weight-light display-4");
+ 	console.log(this);
 });
 </script>
 </body>
