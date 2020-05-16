@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+                   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <!-- meta UTF-8 não funcional se dentro do fragment -->
+	<meta charset="UTF-8">
+	<div th:replace="fragments/header :: header"></div>
+	<title>Login</title>
+</head>
+<body>
+
+
+
+	<div th:insert="fragments/header :: topMenu"></div>
+
+    <div class="container-fluid bg-light"></div>
+
+	<div th:insert="fragments/modals :: reModalLogin"></div>
+    
+	<div th:insert="fragments/footer :: footerScript"></div>
+	
+	<!--  
+	// condicionamente inclui este bloco se houve no processo de 
+	// autenticação do spring.
+	// Por padrão, em caso de erro o spring redireciona para 
+	// o 'controller' "/login?error"
+	-->
+	
+	<!-- param.logout  -->
+		<div th:insert="${param.error} ? ~{fragments/scripts :: showAuthenticationModalForm} : _">
+		<div th:insert="${login} ? ~{fragments/scripts :: showAuthenticationModalForm} : _">
+
+	<!--  
+		<script>
+		$('#re-modal-login').modal('show'); 
+		console.log($('#re-modal-login').html());
+		</script>
+	-->			
+	
+</body>
+</html>
