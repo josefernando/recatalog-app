@@ -14,7 +14,7 @@
             <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleCreateProject" data-toggle="collapse"  data-target="#toggleCreateProject" aria-expanded="true"> Criar Projeto</a>
             <a th:if = "${msg == null }" class="nav-link" href="#toggleCreateProject" data-toggle="collapse" data-target="#toggleCreateProject" aria-expanded="false" > Criar Projeto</a>
 
-            <div id="toggleCreateProject" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuProject">
+            <div id="toggleCreateProject" class="collapse re-toggleSubMenu" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuProject">
 		         <div th:if = "${msg == 'success' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
 		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
 		         	
@@ -58,11 +58,11 @@
             <a th:if = "${projects != null }" class="nav-link text-center font-weight-light display-4" href="#toggleListAllProject" data-toggle="collapse"  data-target="#toggleListAllProject" aria-expanded="true">Listar Projetos</a>
             <a th:if = "${projects == null }" class="nav-link" href="/recatalog/projects"> Listar Projetos</a>
 
-            <div id= "toggleListAllProject" class="collapse" th:classappend="${projects != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
+            <div id= "toggleListAllProject" class="collapse re-toggleSubMenu" th:classappend="${projects != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
 				<p class="small text-center">Lista de Projetos</p>
 				
 				<div th:if="${not #lists.isEmpty(projects)}">
-					<table class="table table-condensed table-hover table-sm"> 
+					<table  class="table table-condensed table-hover table-sm re-table"> 
 						<thead id="headerListAllProject">
 		                    <tr>
 		                        <th class="pb-0">Catálogo</th>
@@ -72,9 +72,9 @@
 		                    </tr>
 		                </thead>
 		                <tbody id="bodyListAllProject">
-		                    <tr th:each="project : ${projects}">
-		                        <td class="pb-0" th:text="${project.getParent().getName()}"></td>
-		                        <td class="pb-0 clickable re-to-breadcrumb-project" th:text="${project.name}"></td>
+		                    <tr class="clickable" th:each="project : ${projects}">
+		                        <td class="pb-0 re-catname" th:text="${project.getParent().getName()}"></td>
+		                        <td class="pb-0 re-projname"  th:text="${project.name}"></td>
 		                        <td class="pb-0" th:text="${project.description}"></td>
 		                        <td class="pb-0" th:text="${project.createdOn}"></td>
 		                    </tr>
@@ -93,21 +93,23 @@
             <a th:if = "${versions != null }" class="nav-link text-center font-weight-light display-4" href="#toggleVersionProject" data-toggle="collapse"  data-target="#toggleVersionProject" aria-expanded="true">Nova Versão</a>
             <a th:if = "${versions == null }" class="nav-link" href="#toggleVersionProject" data-toggle="collapse" data-target="#toggleVersionProject" aria-expanded="false" >Nova Versão</a>
 
-            <div id="toggleVersionProject" class="collapse toggleSubMenu" th:classappend="${versions != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
+            <div id="toggleVersionProject" class="collapse re-toggleSubMenu" th:classappend="${versions != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
 				<p class="small text-center">Nova Versão</p>
 	            <form id="formVersionProject" class="needs-validation" novalidate action="/recatalog/versions" method="post" enctype="multipart/form-data" style="width: 400px; margin: auto" >
+ <!---------------------------------------------------------------------------  
                      <div class="form-group">
                        	<div class="custom-file">
-                       	<!-- changing BROWSER button: https://stackoverflow.com/questions/43250263/bootstrap-4-file-input -->
+                       	<!-- changing BROWSER button: https://stackoverflow.com/questions/43250263/bootstrap-4-file-input 
 	                        <label class="custom-file-label" for="fileUpload">Escolha os Arquivos</label>
 	                        <input type="file" name="files" class="custom-file-input form-control form-control-sm input-files cursor-pointer" multiple id="fileUpload">
 						</div>
                     </div>
+----------------------------------------------------------------------------->
                     <div class="form-group">
                     	<div class="custom-file">
-	                        <label class="custom-file-label" for="dirUpload">Escolha o Diretório</label >
+	                        <label class="custom-file-label" for="dirUpload">Escolha a Pasta de Projeto</label >
 	                        <!-- webkitdirectory api  is non-standard and should not be used without careful consideration. -->
-	                        <input type="file" name="files" class="custom-file-input form-control form-control-sm input-files cursor-pointer" webkitdirectory directory id="dirUpload">
+	                        <input type="file" name="folder" class="custom-file-input form-control form-control-sm input-files cursor-pointer" webkitdirectory directory id="dirUpload">
  						</div>
                     </div>
                     <div class="form-group d-none" id="ra-wrap-symbols">
@@ -143,6 +145,8 @@
 
 <div th:insert="fragments/footer :: footerScript"></div>
 
+<div th:insert="fragments/footer :: customScript"></div>
+
 <script>
 	var form = document.querySelector('.needs-validation');
 	
@@ -175,27 +179,51 @@
 		$(".re-breadcrumb-catalog").parent().next().remove(); //.nextAll().remove(); 
 	});
 </script>
-<script>  
-//Não funciona a mesma funções no javascript handlers.js
-$('#toggleCreateProject').on('show.bs.collapse', function () {
- 	$(this).prev("a").addClass("text-center font-weight-light display-4");
- 	console.log(this);
-});
+<script>
+/*
+$('#re-table tr').each(function() {
+	  // need this to skip the first row
+	  if ($(this).find("td:first").length > 0) {
+	    var cutomerId = $(this).find("td:first").html();
+	    console.log("xxxxxxxx");
+	  }
+	});
+	*/
+	/*
+$('#re-table tr').on('click', function () {
+//	var currentRow=$(this).closest("tr"); 
+//	var col1=$(this).find("td:eq(0)").text(); // get catalog name
+//	var col2=$(this).find("td:eq(1)").text(); // get project name
+//	var col3=$(this).find("td:eq(2)").text(); // get project description
+	
+	if($(this).find('.re-catname').length > 0){
+		breadcrumbSession.catalogName = $(this).find('.re-catname')[0].innerHTML;
+		}
 
-$('#toggleCreateProject').on('hide.bs.collapse', function () {
-	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
-	$(".alert").remove();
-});
+	if($(this).find('.re-projname').length > 0){
+		breadcrumbSession.projectName = $(this).find('.re-projname')[0].innerHTML;
+		}
 
-$('.toggleSubMenu').on('hide.bs.collapse', function () {
-	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
-	$(".alert").remove();
-});
+	if($(this).find('.re-codename').length > 0){
+		breadcrumbSession.codeName = $(this).find('.re-codename')[0].innerHTML;
+		}
+	
+//	var col1=$(this).find("td:eq(0)").text(); // get catalog name
+//	var col2=$(this).find("td:eq(1)").text(); // get project name
+//	var col3=$(this).find("td:eq(2)").text(); // get project description
 
-$('.toggleSubMenu').on('show.bs.collapse', function () {
- 	$(this).prev("a").addClass("text-center font-weight-light display-4");
- 	console.log(this);
+//	breadcrumbSession.catalogName = col1;
+//	breadcrumbSession.projectName = col2;
+
+//	console.log("project breadcrumbSession.catalogName - " + breadcrumbSession.catalogName);
+//	console.log(" project breadcrumbSession.projectName - " + breadcrumbSession.projectName);
+	
+	breacrumb_update();
+   
+//	var data=col1+"\n"+col2+"\n"+col3;
+//	console.log(data);
 });
+	*/
 </script>
 </body>
 </html>

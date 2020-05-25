@@ -12,5 +12,67 @@
     <script src="/js/custom/utility.js"></script>
     <script src="/js/custom/handlers.js"></script>
 </div>
+<div th:fragment="customScript">
+	<script>  
+	//Não funciona a mesma funções no javascript handlers.js ??	
+	$('.re-toggleSubMenu').on('hide.bs.collapse', function () {
+		$(this).prev("a").removeClass("text-center font-weight-light display-4");  
+		$(".alert").remove();
+	});
+	
+	$('.re-toggleSubMenu').on('show.bs.collapse', function () {
+	 	$(this).prev("a").addClass("text-center font-weight-light display-4");
+	});
+	
+
+//==========================================================================
+	
+	var breadcrumbSession = {
+			catalogName : "",
+			projectName : "",
+			codeName    : ""
+			};
+
+	var breacrumb_update = function () {
+			//  var $breadcrumb = $('#ol-breadcrumb');
+			  var $breadcrumb = $($('ol.breadcrumb')[0]);
+              $breadcrumb.empty();
+
+			  if(breadcrumbSession.catalogName.length > 0){
+			  	var $catalogitem = 
+			          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.catalogName}</a></li>`;
+				  $breadcrumb.append($catalogitem);
+			  }
+			  if(breadcrumbSession.projectName.length > 0){
+			    var $projectitem = 
+			          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.projectName}</a></li>`;
+				  $breadcrumb.append($projectitem);
+			  }
+
+			  if(breadcrumbSession.codeName.length > 0){
+				    var $codeitem = 
+				          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.codeName}</a></li>`;
+					  $breadcrumb.append($codeitem);
+			  }			  
+	}
+
+	$('.re-table tr').on('click', function () {
+		if($(this).find('.re-catname').length > 0){
+			breadcrumbSession.catalogName = $(this).find('.re-catname')[0].innerHTML;
+			}
+
+		if($(this).find('.re-projname').length > 0){
+			breadcrumbSession.projectName = $(this).find('.re-projname')[0].innerHTML;
+			}
+
+		if($(this).find('.re-codename').length > 0){
+			breadcrumbSession.codeName = $(this).find('.re-codename')[0].innerHTML;
+			}
+		
+		breacrumb_update();
+	});				  
+</script>
+	
+</div>
 </body>
 </html>

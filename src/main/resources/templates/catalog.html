@@ -16,7 +16,7 @@
             <a th:if = "${msg != null }" class="nav-link text-center font-weight-light display-4" href="#toggleCreateCatalog" data-toggle="collapse"  data-target="#toggleCreateCatalog" aria-expanded="true"> Criar Catálogo</a>
             <a th:if = "${msg == null }" class="nav-link" href="#toggleCreateCatalog" data-toggle="collapse" data-target="#toggleCreateCatalog" aria-expanded="true" >Criar Catálogo</a>
 
-            <div id="toggleCreateCatalog" class="collapse" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuCatalog">
+            <div id="toggleCreateCatalog" class="collapse re-toggleSubMenu" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuCatalog">
 		         <div th:if = "${msg == 'success' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
 		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
 		         	
@@ -52,11 +52,11 @@
             <a th:if = "${catalogs != null }" class="nav-link text-center font-weight-light display-4" href="#toggleListAllCatalog" data-toggle="collapse"  data-target="#toggleListAllCatalog" aria-expanded="true">Listar Catálogos</a>
             <a th:if = "${catalogs == null }" class="nav-link" href="/recatalog/catalogs"> Listar Catálogos</a>
 
-            <div id= "toggleListAllCatalog" class="collapse" th:classappend="${catalogs != null } ? show : '' " data-parent="#accordionSubMenuCatalog" style="width: 500px; margin: auto">            
+            <div id= "toggleListAllCatalog" class="collapse re-toggleSubMenu" th:classappend="${catalogs != null } ? show : '' " data-parent="#accordionSubMenuCatalog" style="width: 500px; margin: auto">            
 				<p class="small text-center">Lista de Catálogos</p>
 				
 				<div th:if="${not #lists.isEmpty(catalogs)}">
-					<table class="table table-condensed table-hover table-sm"> 
+					<table class="table table-condensed table-hover table-sm re-table"> 
 						<thead id="headerListAllCatalog">
 		                    <tr>
 		                        <th class="pb-0">Nome</th>
@@ -65,10 +65,10 @@
 		                    </tr>
 		                </thead>
 		                <tbody id="bodyListAllCatalog">
-		                    <tr th:each="catalog : ${catalogs}">
-		                        <td class="pb-0 clickable re-to-breadcrumb-catalog" th:text="${catalog.name}"></td>
-		                        <td class="pb-0" th:text="${catalog.description}"></td>
-		                        <td class="pb-0" th:text="${catalog.createdOn}"></td>
+		                    <tr class="clickable" th:each="catalog : ${catalogs}">
+		                        <td class="pb-0 re-catname"  th:text="${catalog.name}"></td>
+		                        <td class="pb-0"  th:text="${catalog.description}"></td>
+		                        <td class="pb-0"  th:text="${catalog.createdOn}"></td>
 		                    </tr>
 		                </tbody>                
 					</table>
@@ -85,6 +85,8 @@
 <div th:insert="fragments/modals :: reModalLogin"></div>
 
 <div th:insert="fragments/footer :: footerScript"></div>
+
+<div th:insert="fragments/footer :: customScript"></div>
 
 <script>
 	var form = document.querySelector('.needs-validation');
@@ -114,10 +116,10 @@
 //		console.log($(".re-breadcrumb-catalog").html());
 		$(".re-breadcrumb-catalog").html(toCatalogHtml);
 
-		console.log($(".re-breadcrumb-catalog").html());
+//		console.log($(".re-breadcrumb-catalog").html());
 		$(".re-breadcrumb-catalog").parent().next().remove(); //.nextAll().remove(); 
 	});
-</script>
 
+</script>
 </body>
 </html>

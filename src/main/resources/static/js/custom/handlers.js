@@ -10,35 +10,41 @@ $('#listAllCatalog').on("click", function(e){
 
 //***************************************************************************
 //Executa evento no "show" do collapse element
+/*
 $('#toggleNewCatalog').on('show.bs.collapse', function () {
 	
 	console.log(" PASSO 99x: " + this);
  	$(this).prev().addClass("text-center font-weight-light display-4");
 
 });
-
+*/
 //Executa evento no "hide" do collapse element
+/*
 $('#toggleNewCatalog').on('hide.bs.collapse', function () {
  $(this).prev().removeClass("text-center font-weight-light display-4");  
  
  // remove messagens de sucesso ou de falha
 $(".alert").remove();
 });
+*/
 
 //====================================================================
+/*
 $('#toggleCreateCatalog').on('show.bs.collapse', function () {
  	$(this).prev("a").addClass("text-center font-weight-light display-4");
- 	
- 	console.log(this);
 
 });
+*/
 
+/*
 $('#toggleCreateCatalog').on('hide.bs.collapse', function () {
 	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
 	$(".alert").remove();
 });
 //=====================================================================
+*/
 
+/*
 $('#toggleCreateProject').on('show.bs.collapse', function () {
  	$(this).prev("a").addClass("text-center font-weight-light display-4");
  	console.log(this);
@@ -48,8 +54,9 @@ $('#toggleCreateProject').on('hide.bs.collapse', function () {
 	$(this).prev("a").removeClass("text-center font-weight-light display-4");  
 	$(".alert").remove();
 });
+*/
 //=====================================================================
-
+/*
 // Executa evento no "show" do collapse element
 $('#toggleListAllCatalog, #toggleListAllProject').on('show.bs.collapse', function () {
 	$(this).prev("a").addClass("text-center font-weight-light display-4");
@@ -60,6 +67,7 @@ $('#toggleListAllCatalog, #toggleListAllProject').on('show.bs.collapse', functio
 $('#toggleListAllCatalog, #toggleListAllProject').on('hide.bs.collapse', function () {
  $(this).prev("a").removeClass("text-center font-weight-light display-4");   
 });
+*/
 //=======================
 
 //=======================

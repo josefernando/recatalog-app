@@ -4,11 +4,7 @@
 		    <meta charset="UTF-8">
 		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!-- without webjars-locator-core in pom.xml 
-		    <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.css">
-		    <link rel="stylesheet" href="webjars/bootstrap-select/1.4.2/bootstrap-select.min.css">
-		    <link rel="stylesheet" href="webjars/font-awesome/5.12.0/css/all.css">
--->
+
 		    <!-- using webjars-locator-core in pom.xml,dispensa especificar a versão -->
 		    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css">
 		    <link rel="stylesheet" href="/webjars/bootstrap-select/bootstrap-select.min.css">
@@ -82,14 +78,14 @@
 		    </nav>	
 		<div class="containe-fluid">
 			<nav aria-label="breadcrumb">
-			  <ol class="breadcrumb py-0 mb-0 re-breadcrumb">
+			  <ol id="ol-breadcrumb" class="breadcrumb py-0 mb-0 re-breadcrumb">
 			    <!-- li class="breadcrumb-item"><a href="#">&#183;&nbsp;</li-->
-			    <li th:if = "${msg != null }" class="breadcrumb-item"><a href="#" class="re-breadcrumb-catalog" th:text="${@breadCrumbSession.getCatalogName()}">catalog-name</a></li>
-			    <li th:if = "${msg == null }" class="breadcrumb-item"><a href="#" class="re-breadcrumb-catalog" >catalog-name</a></li>
-			    <li class="breadcrumb-item active" aria-current="page">project-name</li>
+			    <!-- li th:if = "${msg != null }" class="breadcrumb-item"><a href="#" class="re-breadcrumb-catalog" th:text="${@breadCrumbSession.getCatalogName()}">catalog-name</a></li-->
+			    <!-- li th:if = "${msg == null }" class="breadcrumb-item"><a href="#" class="re-breadcrumb-catalog" >catalog-name</a></li-->
+			    <!-- li class="breadcrumb-item active" aria-current="page">project-name</li-->
 			  </ol>
 			</nav>
-		<div>
-		 <hr class="my-0" >		
+		</div>
+		 <hr class="my-0" >	
 	</body>
 </html>
