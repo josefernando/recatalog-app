@@ -1,6 +1,5 @@
 package br.com.recatalog.app.util;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component()
@@ -12,6 +11,12 @@ public class BreadCrumbSession {
 	String projectId;
 	String codeName;
 	String codeId;
+	
+	public BreadCrumbSession() {
+		this.catalogName = "";
+		this.projectName = "";
+		this.codeName = "";
+	}
 	
 	public String getSessionId() {
 		return sessionId;
@@ -70,19 +75,19 @@ public class BreadCrumbSession {
 	}
 	
 	public void clearCatalog() {
-		setCatalogId(null);
-		setCatalogName(null);
+		setCatalogId("");
+		setCatalogName("");
 		clearProject();
 	}
 	
 	public void clearProject() {
-		setProjectId(null);
-		setProjectName(null);
+		setProjectId("");
+		setProjectName("");
 		clearCode();
 	}
 	
 	public void clearCode() {
-		setCodeId(null);
-		setCodeName(null);
+		setCodeId("");
+		setCodeName("");
 	}
 }

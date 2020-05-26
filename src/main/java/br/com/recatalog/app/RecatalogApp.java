@@ -1,6 +1,5 @@
 package br.com.recatalog.app;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +21,7 @@ import br.com.recatalog.app.userdetails.repository.CustomUserDetailsRepository;
 
 @SpringBootApplication
 public class RecatalogApp {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(RecatalogApp.class, args);
 	}
@@ -47,7 +46,6 @@ public class RecatalogApp {
 	
 	@Autowired
 	AccountService accountService;
-	
 	
 	@PostConstruct
 	void init() {

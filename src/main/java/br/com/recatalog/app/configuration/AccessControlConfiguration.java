@@ -67,10 +67,14 @@ public class AccessControlConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//ref.: https://stackoverflow.com/questions/25159772/jquery-post-giving-403-forbidden-error-in-spring-mvc
+		
+		http.csrf().disable(); // Caso não tenha esse commando, erro 403 POST
 		http.authorizeRequests()
 			.antMatchers("/recatalog/projects/**").hasAnyRole("USER")
 			.antMatchers("/recatalog/catalogs/**").hasAnyRole("ADMIN", "USER")
-			.antMatchers("/recatalog").permitAll()
+			.antMatchers("/recatalog/createCatalog/**").hasAnyRole("ADMIN", "USER")
+			.antMatchers("/recatalog/**").permitAll()
 			.antMatchers("/").permitAll()
 			.and()
 			.formLogin().loginPage("/login").permitAll()
