@@ -56,7 +56,7 @@
 			  }			  
 	}
 
-	$('.re-table tr').on('click', function () {
+	$('tr.re-breadcrumb').on('click', function () {
 		if($(this).find('.re-catname').length > 0){
 			breadcrumbSession.catalogName = $(this).find('.re-catname')[0].innerHTML;
 			}

@@ -77,6 +77,7 @@ public class ProjectController {
 
 		if (propertyList.hasProperty("EXCEPTION")) {
 			mav.addObject("msg", "error");
+			breadCrumbSession.clearProject();
 		} else {
 			mav.addObject("msg", "success");
 			

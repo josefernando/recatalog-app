@@ -83,8 +83,8 @@
 			  </ol>
 			  -->
 			
-			  <ol th:if="${@breadCrumbSession.getCatalogName().length() > 0}" id="ol-breadcrumb" class="breadcrumb py-0 mb-0 re-breadcrumb">
-			  	<li class="breadcrumb-item"><a th:text="${@breadCrumbSession.getCatalogName()}" href="#"></a></li>
+			  <ol id="ol-breadcrumb" class="breadcrumb py-0 mb-0 re-breadcrumb">
+			  	<li th:if="${@breadCrumbSession.getCatalogName().length() > 0}" class="breadcrumb-item"><a th:text="${@breadCrumbSession.getCatalogName()}" href="#"></a></li>
 			  	<li th:if="${@breadCrumbSession.getProjectName().length() > 0}" class="breadcrumb-item"><a th:text="${@breadCrumbSession.getProjectName()}" href="#"></a></li>
 			  </ol>
 			   

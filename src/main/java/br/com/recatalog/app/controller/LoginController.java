@@ -1,15 +1,24 @@
 package br.com.recatalog.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.recatalog.app.util.BreadCrumbSession;
+
 @Controller
 public class LoginController {
+	
+	
+	@Autowired
+	private BreadCrumbSession breadCrumbSession;
+	
 	@PostMapping("login")
 	public String login() {
+		breadCrumbSession.clearCatalog();
 		return "login.html";
 	}	
 	
@@ -21,6 +30,8 @@ public class LoginController {
 	
 	@GetMapping("login")
 	public ModelAndView loginx() {
+		breadCrumbSession.clearCatalog();
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login.html");
 		mav.addObject("login", true);

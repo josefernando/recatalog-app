@@ -66,7 +66,7 @@
 		                    </tr>
 		                </thead>
 		                <tbody id="bodyListAllCatalog">
-		                    <tr class="clickable" th:each="catalog : ${catalogs}">
+		                    <tr class="clickable re-breadcrumb" th:each="catalog : ${catalogs}">
 		                        <td class="pb-0 re-catname"  th:text="${catalog.name}"></td>
 		                        <td class="pb-0"  th:text="${catalog.description}"></td>
 		                        <td class="pb-0"  th:text="${catalog.createdOn}"></td>

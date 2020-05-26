@@ -118,6 +118,7 @@ public class CatalogController {
 
 		if (propertyList.hasProperty("EXCEPTION")) {
 			model.addAttribute("msg", "error");
+			breadCrumbSession.clearCatalog();
 		} else {
 			model.addAttribute("msg", "success");
 			
