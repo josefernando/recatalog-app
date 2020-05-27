@@ -26,10 +26,10 @@
 		            <a class="navbar-brand" href="/recatalog"><i class="fas fa-book-reader"></i> RE<scan>&#183;</scan>CATALOG</a>
 		                <ul class="navbar-nav mr-auto">
 		                    <li sec:authorize="isAuthenticated()" class="nav-item">
-		                        <a class="nav-link " href="/recatalog/catalog.html">Catálogo</a>
+		                        <a class="nav-link re-breadcrumb-link" href="/recatalog/catalog.html?catname&projname&codename">Catálogo</a>
 		                    </li>
 		                    <li sec:authorize="isAuthenticated()" class="nav-item">
-		                        <a class="nav-link " href="/recatalog/project.html">Projeto</a>
+		                        <a class="nav-link re-breadcrumb-link" href="/recatalog/project.html?catname&projname&codename">Projeto</a>
 		                    </li> 
            <!-- Common built-in expressions
            https://docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html
@@ -78,14 +78,12 @@
 		    </nav>	
 		<div class="containe-fluid">
 			<nav aria-label="breadcrumb">
-			  <!-- 
-			  <ol id="ol-breadcrumb" class="breadcrumb py-0 mb-0 re-breadcrumb">
-			  </ol>
-			  -->
 			
 			  <ol id="ol-breadcrumb" class="breadcrumb py-0 mb-0 re-breadcrumb">
+			   <!-- 
 			  	<li th:if="${@breadCrumbSession.getCatalogName().length() > 0}" class="breadcrumb-item"><a th:text="${@breadCrumbSession.getCatalogName()}" href="#"></a></li>
 			  	<li th:if="${@breadCrumbSession.getProjectName().length() > 0}" class="breadcrumb-item"><a th:text="${@breadCrumbSession.getProjectName()}" href="#"></a></li>
+			  -->
 			  </ol>
 			   
 			</nav>

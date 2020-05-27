@@ -24,9 +24,6 @@
 	 	$(this).prev("a").addClass("text-center font-weight-light display-4");
 	});
 	
-
-//==========================================================================
-	
 	var breadcrumbSession = {
 			catalogName : "",
 			projectName : "",
@@ -34,8 +31,9 @@
 			};
 
 	var breacrumb_update = function () {
-			//  var $breadcrumb = $('#ol-breadcrumb');
 			  var $breadcrumb = $($('ol.breadcrumb')[0]);
+
+			  //limpa breadcrumb
               $breadcrumb.empty();
 
 			  if(breadcrumbSession.catalogName.length > 0){
@@ -43,6 +41,7 @@
 			          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.catalogName}</a></li>`;
 				  $breadcrumb.append($catalogitem);
 			  }
+			  
 			  if(breadcrumbSession.projectName.length > 0){
 			    var $projectitem = 
 			          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.projectName}</a></li>`;
@@ -53,8 +52,64 @@
 				    var $codeitem = 
 				          `<li class="breadcrumb-item"><a href="#">${breadcrumbSession.codeName}</a></li>`;
 					  $breadcrumb.append($codeitem);
-			  }			  
+			  }	
+
+//			  console.log("vai chamar breacrumb_update_link() de breacrumb_update")
+			  breacrumb_update_link();		  
 	}
+
+	/*
+	   Atualiza link de chamada das páginas catalog.html, project.html e code.html
+	   com query parameters do breadcrumbsession
+	*/
+	var breacrumb_update_link = function () {
+			/*---------------------------------------------------------
+			  if(breadcrumbSession.catalogName) testa if breadcrumbSession.catalogName
+					null
+					undefined
+					NaN
+					empty string ("")
+					0
+					false
+			------------------------------------------------------------*/
+		   if(!breadcrumbSession.catalogName){
+//			   console.log("saindo de breacrumb_update_link, nada em breadcrumb ")
+			return;
+			   }
+		   
+//			console.log("entrando em breacrumb_update_link()");
+//			console.log("breadcrumbSession.catalogName: " + breadcrumbSession.catalogName );
+//			console.log("breadcrumbSession.projectName: " + breadcrumbSession.projectName );
+			
+		  var menu_links = $('a.re-breadcrumb-link');
+
+//		  console.log("catalog link: " + menu_links[0])
+//		  console.log("project link: " + menu_links[1])
+
+		  for (var i = 0; i < menu_links.length; i++) {
+//			  console.log("link antes: " + (menu_links[i]));
+
+			  var str = menu_links[i].getAttribute("href");
+//			  console.log(str);
+			  var patt = /[^?]+/i;
+			  var result = str.match(patt);
+
+			  var queryParam = "";
+			  
+			  if(breadcrumbSession.catalogName){
+				  queryParam = "?catname=" + breadcrumbSession.catalogName;
+			  }
+
+			  if(breadcrumbSession.projectName){
+				  queryParam = queryParam + "&projname=" + breadcrumbSession.projectName;
+			  }
+
+			  menu_links[i].setAttribute("href", result + queryParam);
+			  
+//			  console.log("link depois: " + (menu_links[i]));
+		  }
+	}
+	  
 
 	$('tr.re-breadcrumb').on('click', function () {
 		if($(this).find('.re-catname').length > 0){
@@ -68,11 +123,23 @@
 		if($(this).find('.re-codename').length > 0){
 			breadcrumbSession.codeName = $(this).find('.re-codename')[0].innerHTML;
 			}
-		
+
+//		console.log("vai chamar breacrumb_update() de clique tabela")
 		breacrumb_update();
 	});				  
 </script>
-	
+
+<script th:inline="javascript">
+//------------------------------------------------------
+// referência: https://attacomsian.com/blog/thymeleaf-set-javascript-variable
+//------------------------------------------------------
+breadcrumbSession.catalogName = /*[[${@breadCrumbSession.getCatalogNameAndClear()}]]*/ "CATALOGXXX";
+    breadcrumbSession.projectName = /*[[${@breadCrumbSession.getProjectNameAndClear()}]]*/ "PROJECTXXX";
+    breadcrumbSession.codeName    = /*[[${@breadCrumbSession.getCodeNameAndClear()}]]*/ "CODEXXX";
+
+//    console.log("vai chamar breacrumb_update() thymeleaf script");
+    breacrumb_update();
+    </script>
 </div>
 </body>
 </html>

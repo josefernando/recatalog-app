@@ -27,9 +27,6 @@ public class CatalogController {
 	@Autowired
 	private BreadCrumbSession breadCrumbSession;
 
-//	@Value("${urlBase}")
-//	private String urlBase;
-
 	@GetMapping("")
 	public String home() {
 		return "index.html";
@@ -40,8 +37,24 @@ public class CatalogController {
 		return "index.html";
 	}
 
+	/*
 	@GetMapping("/catalog.html")
 	public String catalog() {
+		return "catalog.html";
+	}
+	*/
+	
+	// regex assegura case insensitive . veja configuração Spring
+	//@GetMapping("/catalog.html")
+//	@GetMapping("/{id:[Cc][Aa][Tt][Aa][Ll][Oo][Gg][.][Hh][Tt][Mm][Ll]}")
+	@GetMapping("/catalog.html")
+	public String catalog(@RequestParam(required = false, defaultValue="") String catname
+			, @RequestParam(required = false, defaultValue="") String projname 
+			, @RequestParam(required = false, defaultValue="") String codename) {
+		breadCrumbSession.setCatalogName(catname); 
+		breadCrumbSession.setProjectName(projname); 
+		breadCrumbSession.setCodeName(codename); 
+
 		return "catalog.html";
 	}
 
@@ -50,8 +63,17 @@ public class CatalogController {
 		return "DefCatalog.html";
 	}
 
+//	@GetMapping("/project.html")
+//	@GetMapping("/{id:[Pp][Rr][Oo][Jj][Ee][Cc][Tt][.][Hh][Tt][Mm][Ll]}")
+//	public String project(@PathVariable("id") String id) {
 	@GetMapping("/project.html")
-	public String project() {
+	public String project(@RequestParam(required = false, defaultValue="") String catname
+			, @RequestParam(required = false, defaultValue="") String projname 
+			, @RequestParam(required = false, defaultValue="") String codename) {
+		
+		breadCrumbSession.setCatalogName(catname); 
+		breadCrumbSession.setProjectName(projname); 
+		breadCrumbSession.setCodeName(codename); 
 		return "project.html";
 	}
 
@@ -131,8 +153,16 @@ public class CatalogController {
 	}
 
 	@GetMapping("/catalogs")
-	public String listCatalogs(Model model) {
+	public String listCatalogs(@RequestParam(required = false, defaultValue="") String catname
+			, @RequestParam(required = false, defaultValue="") String projname 
+			, @RequestParam(required = false, defaultValue="") String codename
+			, Model model) {
+		
+		breadCrumbSession.setCatalogName(catname); 
+		breadCrumbSession.setProjectName(projname); 
+		breadCrumbSession.setCodeName(codename); 
 		model.addAttribute("catalogs", catalogService.listAllCatalogItens());
+
 		return "catalog.html";
 	}
 

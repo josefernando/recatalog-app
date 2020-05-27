@@ -30,7 +30,6 @@
 		         </div>
 		         
 	             <form id="formCreateCatalog" class="needs-validation" novalidate action="/recatalog/createCatalog" method="post" enctype="application/x-www-form-urlencoded" style="width: 400px; margin: auto" >
-	              <dxa:csrf-token/>
 	                 <p class="small text-center">Novo Catálogo</p>
 	                 <div class="form-group">
 	                     <label for="catalogName">Nome do Catálogo</label>
@@ -108,19 +107,6 @@
 	        $("#submit-btn").attr("disabled", !form.checkValidity());
 	    });
 	});
-</script>
-
-<script>
-	$(".re-to-breadcrumb-catalog").on('click', function () {
-		var toCatalogHtml = $(this).html(); 
-//		console.log(toCatalogHtml);
-//		console.log($(".re-breadcrumb-catalog").html());
-		$(".re-breadcrumb-catalog").html(toCatalogHtml);
-
-//		console.log($(".re-breadcrumb-catalog").html());
-		$(".re-breadcrumb-catalog").parent().next().remove(); //.nextAll().remove(); 
-	});
-
 </script>
 </body>
 </html>

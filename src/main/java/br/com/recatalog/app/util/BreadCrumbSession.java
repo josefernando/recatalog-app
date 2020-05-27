@@ -74,6 +74,24 @@ public class BreadCrumbSession {
 		this.codeId = codeId;
 	}
 	
+	public String getCatalogNameAndClear() {
+		String c = catalogName;
+		catalogName = "";
+		return c;
+	}
+	
+	public String getProjectNameAndClear() {
+		String c = projectName;
+		projectName = "";
+		return c;
+	}
+	
+	public String getCodeNameAndClear() {
+		String c = codeName;
+		codeName = "";
+		return c;
+	}
+	
 	public void clearCatalog() {
 		setCatalogId("");
 		setCatalogName("");
