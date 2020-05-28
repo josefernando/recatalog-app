@@ -50,7 +50,7 @@
 
             <!-- a  class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a-->
             <a th:if = "${catalogs != null }" class="nav-link text-center font-weight-light display-4" href="#toggleListAllCatalog" data-toggle="collapse"  data-target="#toggleListAllCatalog" aria-expanded="true">Listar Catálogos</a>
-            <a th:if = "${catalogs == null }" class="nav-link" href="/recatalog/catalogs"> Listar Catálogos</a>
+            <a th:if = "${catalogs == null }" class="nav-link re-breadcrumb-link" href="/recatalog/catalogs"> Listar Catálogos</a>
 
             <div id= "toggleListAllCatalog" class="collapse re-toggleSubMenu" th:classappend="${catalogs != null } ? show : '' " data-parent="#accordionSubMenuCatalog" style="width: 500px; margin: auto">            
 				<p class="small text-center">Lista de Catálogos</p>

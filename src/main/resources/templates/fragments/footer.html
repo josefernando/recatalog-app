@@ -22,6 +22,8 @@
 	
 	$('.re-toggleSubMenu').on('show.bs.collapse', function () {
 	 	$(this).prev("a").addClass("text-center font-weight-light display-4");
+
+	 	$(this).find('input.re-breadcrumb-catalog-name').attr("value",breadcrumbSession.catalogName);
 	});
 	
 	var breadcrumbSession = {
@@ -34,7 +36,7 @@
 			  var $breadcrumb = $($('ol.breadcrumb')[0]);
 
 			  //limpa breadcrumb
-              $breadcrumb.empty();
+              $('li.breadcrumb-item').remove();
 
 			  if(breadcrumbSession.catalogName.length > 0){
 			  	var $catalogitem = 
@@ -54,7 +56,6 @@
 					  $breadcrumb.append($codeitem);
 			  }	
 
-//			  console.log("vai chamar breacrumb_update_link() de breacrumb_update")
 			  breacrumb_update_link();		  
 	}
 
@@ -73,24 +74,14 @@
 					false
 			------------------------------------------------------------*/
 		   if(!breadcrumbSession.catalogName){
-//			   console.log("saindo de breacrumb_update_link, nada em breadcrumb ")
-			return;
-			   }
-		   
-//			console.log("entrando em breacrumb_update_link()");
-//			console.log("breadcrumbSession.catalogName: " + breadcrumbSession.catalogName );
-//			console.log("breadcrumbSession.projectName: " + breadcrumbSession.projectName );
+				return;
+		   }
 			
 		  var menu_links = $('a.re-breadcrumb-link');
 
-//		  console.log("catalog link: " + menu_links[0])
-//		  console.log("project link: " + menu_links[1])
-
 		  for (var i = 0; i < menu_links.length; i++) {
-//			  console.log("link antes: " + (menu_links[i]));
 
 			  var str = menu_links[i].getAttribute("href");
-//			  console.log(str);
 			  var patt = /[^?]+/i;
 			  var result = str.match(patt);
 
@@ -105,13 +96,19 @@
 			  }
 
 			  menu_links[i].setAttribute("href", result + queryParam);
-			  
-//			  console.log("link depois: " + (menu_links[i]));
 		  }
 	}
-	  
+
+  function initializeBreadcrumbSession(){
+		   breadcrumbSession.catalogName = "";
+		   breadcrumbSession.projectName = "";
+		   breadcrumbSession.codeName = "";
+  }  
 
 	$('tr.re-breadcrumb').on('click', function () {
+
+		initializeBreadcrumbSession();
+				
 		if($(this).find('.re-catname').length > 0){
 			breadcrumbSession.catalogName = $(this).find('.re-catname')[0].innerHTML;
 			}
@@ -124,7 +121,6 @@
 			breadcrumbSession.codeName = $(this).find('.re-codename')[0].innerHTML;
 			}
 
-//		console.log("vai chamar breacrumb_update() de clique tabela")
 		breacrumb_update();
 	});				  
 </script>
@@ -137,9 +133,8 @@ breadcrumbSession.catalogName = /*[[${@breadCrumbSession.getCatalogNameAndClear(
     breadcrumbSession.projectName = /*[[${@breadCrumbSession.getProjectNameAndClear()}]]*/ "PROJECTXXX";
     breadcrumbSession.codeName    = /*[[${@breadCrumbSession.getCodeNameAndClear()}]]*/ "CODEXXX";
 
-//    console.log("vai chamar breacrumb_update() thymeleaf script");
     breacrumb_update();
-    </script>
+</script>
 </div>
 </body>
 </html>

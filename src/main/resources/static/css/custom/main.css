@@ -1,8 +1,24 @@
 
 /* Style to change separator  */
+
+
+ 
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">";
+    color: #ff0000; 
 }
+
+.breadcrumb a {
+	font-size : 14px !important;
+    color: #ff0000; 
+}
+
+.fa-angle-double-right {
+  color : #ff0000;
+}
+
+
+
     
 .clickable {
     cursor: pointer;

@@ -31,7 +31,7 @@
 	                 <p class="small text-center">Novo Projeto</p>
 	                 <div class="form-group">
 	                     <label for="catalogName">Nome do Cátalogo</label>
-	                     <input type="text" name="catalogName" class="form-control form-control-sm inputForm pathParam"
+	                     <input type="text" name="catalogName" class="form-control form-control-sm inputForm pathParam re-breadcrumb re-breadcrumb-catalog-name"
 	                     		 autocomplete="off" required pattern="[A-Za-z][\w]*">
 	                     <div class="invalid-feedback">Informe o nome do catálogo</div>	                     		 
 	                 </div>	                 
@@ -56,7 +56,7 @@
 
             <!-- a  class="nav-link" href="#toggleListAllCatalog" data-toggle="collapse" aria-expanded="false" data-target="#toggleListAllCatalog">Listar Catálogos</a-->
             <a th:if = "${projects != null }" class="nav-link text-center font-weight-light display-4" href="#toggleListAllProject" data-toggle="collapse"  data-target="#toggleListAllProject" aria-expanded="true">Listar Projetos</a>
-            <a th:if = "${projects == null }" class="nav-link" href="/recatalog/projects"> Listar Projetos</a>
+            <a th:if = "${projects == null }" class="nav-link re-breadcrumb-link" href="/recatalog/projects"> Listar Projetos</a>
 
             <div id= "toggleListAllProject" class="collapse re-toggleSubMenu" th:classappend="${projects != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
 				<p class="small text-center">Lista de Projetos</p>
@@ -94,7 +94,7 @@
             <a th:if = "${versions == null }" class="nav-link" href="#toggleVersionProject" data-toggle="collapse" data-target="#toggleVersionProject" aria-expanded="false" >Nova Versão</a>
 
             <div id="toggleVersionProject" class="collapse re-toggleSubMenu" th:classappend="${versions != null } ? show : '' " data-parent="#accordionSubMenuProject" style="width: 600px; margin: auto">            
-				<p class="small text-center">Nova Versão</p>
+				<p class="small text-center">Nova Versão de Projeto</p>
 	            <form id="formVersionProject" class="needs-validation" novalidate action="/recatalog/versions" method="post" enctype="multipart/form-data" style="width: 400px; margin: auto" >
  <!---------------------------------------------------------------------------  
                      <div class="form-group">
@@ -105,6 +105,10 @@
 						</div>
                     </div>
 ----------------------------------------------------------------------------->
+ 	                 <div class="form-group">
+	                         <label for="catalog">Catálogo</label>
+	                         <input class="form-control form-control-sm inputForm  pathParam " type="text" name="catalog" >
+	                 </div>
                     <div class="form-group">
                     	<div class="custom-file">
 	                        <label class="custom-file-label" for="dirUpload">Escolha a Pasta de Projeto</label >

@@ -89,8 +89,21 @@ public class ProjectController {
 		return mav;
 	}
 
+//	@GetMapping("/projects")
+//	public String listCatalogs(Model model) {
+//		model.addAttribute("projects", projectService.listAllProjects());
+//		return "project.html";
+//	}
+	
 	@GetMapping("/projects")
-	public String listCatalogs(Model model) {
+	public String listProjects(@RequestParam(required = false, defaultValue="") String catname
+			, @RequestParam(required = false, defaultValue="") String projname 
+			, @RequestParam(required = false, defaultValue="") String codename
+			, Model model) {
+		
+		breadCrumbSession.setCatalogName(catname); 
+		breadCrumbSession.setProjectName(projname); 
+		breadCrumbSession.setCodeName(codename); 
 		model.addAttribute("projects", projectService.listAllProjects());
 		return "project.html";
 	}
