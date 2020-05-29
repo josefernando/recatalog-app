@@ -16,10 +16,10 @@
 
             <div id="toggleCreateProject" class="collapse re-toggleSubMenu" th:classappend="${msg != null } ? show : '' " data-parent="#accordionSubMenuProject">
 		         <div th:if = "${msg == 'success' }" class="alert alert-success alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
-		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
+		         	<button type="button" class="close fade show " data-dismiss="alert">&times;</button>
 		         	
 		         	<!-- lê spring bean @breadCrumbSession.getCatalogName() -->
-		            <p class=" mb-0 " >Projeto <span th:text="${@breadCrumbSession.getProjectName()}"></span> Criado Com Sucesso</p>
+		            <p class="mb-0 " >Projeto <span th:text="${@breadCrumbSession.getProjectName()}" class="re-breadcrumb-update-project"></span> Criado Com Sucesso</p>
 		         </div>
 		         
 		         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">

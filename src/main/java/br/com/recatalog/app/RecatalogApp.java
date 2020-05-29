@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.recatalog.app.domain.repository.CatalogRepository;
+import br.com.recatalog.app.domain.repository.CatalogItemRepository;
+//import br.com.recatalog.app.domain.repository.CatalogRepository;
 import br.com.recatalog.app.model.userdetails.CustomGrantedAuthority;
 import br.com.recatalog.app.model.userdetails.CustomUserDetails;
 import br.com.recatalog.app.security.auth.model.Account;
@@ -27,7 +28,9 @@ public class RecatalogApp {
 	}
 	
 	@Autowired
-	CatalogRepository catalogRepository;
+//	CatalogRepository catalogRepository;
+	CatalogItemRepository catalogItemRepository;
+
 	
 	@Autowired
 	AccountRepository accountRepository;
@@ -49,7 +52,7 @@ public class RecatalogApp {
 	
 	@PostConstruct
 	void init() {
-		System.out.println("cats:" + catalogRepository.findAll());
+		System.out.println("cats:" + catalogItemRepository.findAll());
 		System.out.println("users:" + usersRepository.findAll());	
 		
 		System.out.println("accounts:" + accountRepository.findAll());	

@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service;
 
 import br.com.recatalog.app.dao.CatalogDAO;
 import br.com.recatalog.app.dao.CatalogDAOHibernate;
-import br.com.recatalog.app.domain.repository.CatalogRepository;
+import br.com.recatalog.app.domain.repository.CatalogItemRepository;
 import br.com.recatalog.app.model.domain.Catalog;
 import br.com.recatalog.app.model.domain.CatalogItem;
 import br.com.recatalog.util.PropertyList;
 
 @Service
-public class CatalogService {
+public class CatalogItemService {
 	
 	@Autowired
-	CatalogRepository catalogRepository;
+	CatalogItemRepository catalogItemRepository;
 	
 	
 //	@SuppressWarnings("unused")
@@ -71,30 +71,30 @@ public class CatalogService {
 //		propertyList.addProperty("ENTITY", catalog);
 //		catalogDAO.addCatalogItem(propertyList);
 		
-		Optional<Catalog> hasCatalog = catalogRepository.findById(catalog.getId());
+		Optional<CatalogItem> hasCatalog = catalogItemRepository.findById(catalog.getId());
 
 		if(!hasCatalog.isEmpty()) {
 			propertyList.addProperty("EXCEPTION", "DUP KEY");
 			return propertyList;
 		}
 		
-		CatalogItem savedCatalog = catalogRepository.save(catalog);
+		CatalogItem savedCatalog = catalogItemRepository.save(catalog);
 		propertyList.addProperty("ENTITY", savedCatalog);
 		return propertyList;
 	}
 	
 	public Catalog create(Catalog catalog) {
-		Catalog savedCatalog = catalogRepository.save(catalog);
+		Catalog savedCatalog = catalogItemRepository.save(catalog);
 		return savedCatalog;
 	}
 	
-	public List<Catalog> listCatalogItens(){
-		List<Catalog> itens = catalogRepository.findAll();
+	public List<CatalogItem> listCatalogItens(){
+		List<CatalogItem> itens = catalogItemRepository.findAll();
 		return itens;
 	}
 	
-	public List<Catalog> listAllCatalogItens(){
-		List<Catalog> itens = catalogRepository.findAll();
+	public List<CatalogItem> listAllCatalogItens(){
+		List<CatalogItem> itens = catalogItemRepository.findAll();
 		return itens;
 	}
 }

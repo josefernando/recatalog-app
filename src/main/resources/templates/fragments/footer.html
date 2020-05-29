@@ -18,12 +18,17 @@
 	$('.re-toggleSubMenu').on('hide.bs.collapse', function () {
 		$(this).prev("a").removeClass("text-center font-weight-light display-4");  
 		$(".alert").remove();
+		if($(this).find('re-breadcrumb-update-project').length){ // existe elemento?
+			breadcrumbSession.projectName = $(this).find('re-breadcrumb-update-project')[0].innerHTML;
+			breacrumb_update();
+		}
 	});
 	
 	$('.re-toggleSubMenu').on('show.bs.collapse', function () {
 	 	$(this).prev("a").addClass("text-center font-weight-light display-4");
 
 	 	$(this).find('input.re-breadcrumb-catalog-name').attr("value",breadcrumbSession.catalogName);
+	 	$(this).find('input.re-breadcrumb-project-name').attr("value",breadcrumbSession.projectName);
 	});
 	
 	var breadcrumbSession = {

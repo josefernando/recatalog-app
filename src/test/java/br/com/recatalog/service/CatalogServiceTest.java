@@ -5,18 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.recatalog.app.service.CatalogService;
+import br.com.recatalog.app.service.CatalogItemService;
+//import br.com.recatalog.app.service.CatalogService;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogServiceTest {
 	
 	PropertyList properties;
-	CatalogService catalogService;
+	CatalogItemService catalogItemService;
 	
 	@BeforeEach
 	public void init() {
 		properties = new PropertyList();
-		catalogService = new CatalogService();
+		catalogItemService = new CatalogItemService();
 	}
 	
 	@Test
@@ -25,7 +26,7 @@ public class CatalogServiceTest {
 		properties.addProperty("NAME", "SINISTRO");
 		properties.addProperty("DESCRIPTION", "Descrição Sinistro");
 
-		catalogService.addCatalogItem(properties);
+		catalogItemService.addCatalogItem(properties);
 		
 		assertTrue(true);
 	}

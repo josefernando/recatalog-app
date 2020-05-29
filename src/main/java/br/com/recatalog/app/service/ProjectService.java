@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 import br.com.recatalog.app.Exception.DuplicatedCatalogItemException;
 import br.com.recatalog.app.Exception.ParentCatalogItemNotFoundException;
 import br.com.recatalog.app.configuration.GitConfiguration;
-import br.com.recatalog.app.domain.repository.CatalogRepository;
+import br.com.recatalog.app.domain.repository.CatalogItemRepository;
+//import br.com.recatalog.app.domain.repository.CatalogRepository;
 import br.com.recatalog.app.domain.repository.ProjectRepository;
 import br.com.recatalog.app.model.domain.CatalogItem;
 import br.com.recatalog.app.model.domain.Project;
@@ -28,7 +29,9 @@ public class ProjectService {
 	private GitConfiguration gitConfig;
 	
 	@Autowired
-	CatalogRepository catalogRepository;
+//	CatalogRepository catalogRepository;
+	CatalogItemRepository catalogItemRepository;
+
 	
 	@Autowired
 	ProjectRepository projectRepository;
@@ -56,7 +59,7 @@ public class ProjectService {
 		project.setDescription(projectDesc);
 		project.setDtCreated(new Date());
 		
-		Optional<CatalogItem> catalogParent = catalogRepository.findById(catalogName);
+		Optional<CatalogItem> catalogParent = catalogItemRepository.findById(catalogName);
 		
 		if(catalogParent.isEmpty()) {
 			throw new ParentCatalogItemNotFoundException("Parent Catalog Not Found:" + catalogName);
@@ -65,7 +68,7 @@ public class ProjectService {
 		CatalogItem parent = catalogParent.get();
 		project.setParent(parent);
 		
-		Optional<CatalogItem> hasCatalog = catalogRepository.findById(project.getId());
+		Optional<CatalogItem> hasCatalog = catalogItemRepository.findById(project.getId());
 
 		if(!hasCatalog.isEmpty()) {
 			throw new DuplicatedCatalogItemException("Projeto Id Duplicado:" + project.getId());
@@ -126,7 +129,7 @@ public class ProjectService {
 //			throw new DuplicatedCatalogItemException("Projeto Id Duplicado:" + project.getId());
 //		}
 		
-		CatalogItem savedProject = catalogRepository.save(project);
+		CatalogItem savedProject = catalogItemRepository.save(project);
 		properties.addProperty("ENTITY", savedProject);
 		return properties;
 	}
@@ -139,13 +142,13 @@ public class ProjectService {
 		project.setDtCreated(new Date());
 		project.setParent((CatalogItem)propertyList.mustProperty("PARENT"));
 		
-		Optional<CatalogItem> hasCatalog = catalogRepository.findById(project.getId());
+		Optional<CatalogItem> hasCatalog = catalogItemRepository.findById(project.getId());
 
 		if(!hasCatalog.isEmpty()) {
 			throw new DuplicatedCatalogItemException("Projeto Id Duplicado:" + project.getId());
 		}
 		
-		CatalogItem savedProject = catalogRepository.save(project);
+		CatalogItem savedProject = catalogItemRepository.save(project);
 		propertyList.addProperty("ENTITY", savedProject);
 		return propertyList;
 	}

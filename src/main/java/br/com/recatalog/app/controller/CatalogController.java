@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.recatalog.app.model.domain.Catalog;
+import br.com.recatalog.app.service.CatalogItemService;
 import br.com.recatalog.app.service.CatalogService;
+//import br.com.recatalog.app.service.CatalogService;
 import br.com.recatalog.app.util.BreadCrumbSession;
 import br.com.recatalog.util.PropertyList;
 
@@ -20,6 +22,10 @@ public class CatalogController {
 	/*
 	 * @Autowired private GitConfiguration gitConfig;
 	 */
+
+	@Autowired
+//	private CatalogService catalogService;
+	private CatalogItemService catalogItemService;
 
 	@Autowired
 	private CatalogService catalogService;
@@ -136,7 +142,7 @@ public class CatalogController {
 		propertyList.addProperty("NAME", cataLogName);
 		propertyList.addProperty("DESCRIPTION", description);
 
-		catalogService.addCatalogItem(propertyList);
+		catalogItemService.addCatalogItem(propertyList);
 
 		if (propertyList.hasProperty("EXCEPTION")) {
 			model.addAttribute("msg", "error");
