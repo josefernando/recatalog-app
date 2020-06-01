@@ -91,6 +91,8 @@ class PropertyId_ implements Serializable  {
 	
 	@ManyToOne
 	@JoinColumn(name="FK_CATALOG_ID", referencedColumnName="ID")
+//	@JsonIgnore // evita loop infinito, ref.: https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
+//	@JsonManagedReference // ref.: https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 	CatalogItem catalog;
 	
 	@Column(name="PROPERTY_KEY")

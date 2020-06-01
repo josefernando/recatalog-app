@@ -27,6 +27,7 @@
 	<properties>
 		<java.version>13</java.version>
     	<junit.jupiter.version>5.6.0</junit.jupiter.version>
+    	<gson.version>2.8.6</gson.version>
 	</properties>
   
   <dependencies>
@@ -145,6 +146,11 @@
   	  <artifactId>util</artifactId>
       <version>1.0.0</version>  
     </dependency>
+    
+    <dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	</dependency>
 	
 	<!-- 
 	<dependency>

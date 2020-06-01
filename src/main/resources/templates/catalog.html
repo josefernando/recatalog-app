@@ -24,6 +24,11 @@
 		            <p class=" mb-0 " >Catálogo <span th:text="${@breadCrumbSession.getCatalogName()}"></span> Criado Com Sucesso</p>
 		         </div>
 		         
+		         <div th:if = "${msg == 'dup_key' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
+		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
+		             	<p class=" mb-0 ">Falha na operação - Catálogo já existe!</p>
+		         </div>
+		         
 		         <div th:if = "${msg == 'error' }" class="alert alert-danger alert-dismissible mb-15  message-genSymbolTableForm re-message" style="width: 400px; margin: auto">
 		         	<button type="button" class="close fade show" data-dismiss="alert">&times;</button>
 		             	<p class=" mb-0 ">Falha Na Criação Do Catálogo</p>

@@ -144,7 +144,10 @@ public class CatalogController {
 
 		catalogItemService.addCatalogItem(propertyList);
 
-		if (propertyList.hasProperty("EXCEPTION")) {
+		if (propertyList.hasProperty("DUP_KEY_EXCEPTION")) {
+			model.addAttribute("msg", "dup_key");
+			breadCrumbSession.clearCatalog();
+		} else if (propertyList.hasProperty("EXCEPTION")) {
 			model.addAttribute("msg", "error");
 			breadCrumbSession.clearCatalog();
 		} else {
@@ -167,7 +170,7 @@ public class CatalogController {
 		breadCrumbSession.setCatalogName(catname); 
 		breadCrumbSession.setProjectName(projname); 
 		breadCrumbSession.setCodeName(codename); 
-		model.addAttribute("catalogs", catalogService.listAllCatalogItens());
+		model.addAttribute("catalogs", catalogService.listAllCatalogs());
 
 		return "catalog.html";
 	}

@@ -16,6 +16,7 @@ import br.com.recatalog.app.configuration.GitConfiguration;
 import br.com.recatalog.app.domain.repository.CatalogItemRepository;
 //import br.com.recatalog.app.domain.repository.CatalogRepository;
 import br.com.recatalog.app.domain.repository.ProjectRepository;
+import br.com.recatalog.app.model.domain.Catalog;
 import br.com.recatalog.app.model.domain.CatalogItem;
 import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.util.GitSourceManagement;
@@ -156,5 +157,11 @@ public class ProjectService {
 	public List<Project> listAllProjects(){
 		List<Project> projects = projectRepository.findAll();
 		return projects;
+	}
+	
+	public Project findById(String id) {
+		Optional<Project> hasCatalog = projectRepository.findById(id);
+		
+		return hasCatalog.orElse(null);
 	}
 }

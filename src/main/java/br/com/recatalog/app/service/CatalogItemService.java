@@ -74,7 +74,7 @@ public class CatalogItemService {
 		Optional<CatalogItem> hasCatalog = catalogItemRepository.findById(catalog.getId());
 
 		if(!hasCatalog.isEmpty()) {
-			propertyList.addProperty("EXCEPTION", "DUP KEY");
+			propertyList.addProperty("DUP_KEY_EXCEPTION", "DUP KEY");
 			return propertyList;
 		}
 		

@@ -133,7 +133,7 @@ public class ProjectController {
 		logger.error( exceptionStackError.toString());
 		
 		redirectAttrs.addFlashAttribute("error", e);
-	    redirectAttrs.addFlashAttribute("msg", "error");
+	    redirectAttrs.addFlashAttribute("msg", "dup_key");
 	    
 	    return "redirect:project.html";
 	}

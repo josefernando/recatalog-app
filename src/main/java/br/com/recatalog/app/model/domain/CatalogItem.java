@@ -18,12 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.domain.Persistable;
-
 @Entity
 @Table(name = "TBCATALOG_ITEM")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class CatalogItem implements Serializable, Persistable {
+public class CatalogItem implements Serializable{ //, Persistable {
 	private static final long serialVersionUID = 1L;
 	
 	public CatalogItem() {
@@ -49,7 +47,10 @@ public class CatalogItem implements Serializable, Persistable {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
 	private CatalogItem parent;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
+//	@JsonIgnore // evita loop infinito, ref.: https://stackoverflow.com/questions/3325387/infinite-recursion-with-jackson-json-and-hibernate-jpa-issue
+//	@JsonBackReference // ref.: https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 	private List<PropertyCatalog> properties;
     
 	public String getId() {
@@ -151,8 +152,8 @@ public class CatalogItem implements Serializable, Persistable {
           be delegated to the isNew() method implemented by the entity.
 	 */
 	
-	@Override
-	public boolean isNew() {
-		return true;
-	}	
+//	@Override
+//	public boolean isNew() {
+//		return true;
+//	}	
 }
