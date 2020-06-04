@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,13 +18,20 @@ import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.util.PropertyList;
 
 @Service
-public class ProjectService_New {
+public class ProjectServiceOld {
 	
 	@Autowired
 	CatalogItemRepository catalogItemRepository;
 	
 	@Autowired
 	ProjectRepository projectRepository;
+	
+//	@SuppressWarnings("unused")
+//	@Autowired
+//	private DataSourceConfiguration dataSourceConfig;
+	
+//	@Value("${recatalog.git.urlbase}") // recupera valor do arquivo application.properties
+//	private String gitUrlBase;
 	
 	public PropertyList createProject(PropertyList properties) throws IOException {
 		String projectName = (String)properties.mustProperty("PROJECT_NAME");
@@ -36,12 +41,7 @@ public class ProjectService_New {
  // todos os nomes do catálogo  são case-sensitive
 		projectName = projectName.toUpperCase();
 		catalogName = catalogName.toUpperCase();
-		
-	    String CREATE_EMPLOYEE_ENDPOINT_URL = "http://localhost:8089/api/git/repositories";
-	    
-        RestTemplate restTemplate = new RestTemplate();
-        
-        ResponseEntity<String> entity = restTemplate.postForEntity(CREATE_EMPLOYEE_ENDPOINT_URL, projectName, String.class);
+
 		
 		Project project = new Project();
 
@@ -68,5 +68,34 @@ public class ProjectService_New {
 		properties.addProperty("ENTITY", savedProject);
 		return properties;
 	}
+	
+	public PropertyList addCatalogItem(PropertyList propertyList) {
+		Project project = new Project();
 
+		project.setName((String)propertyList.mustProperty("NAME"));
+		project.setDescription((String)propertyList.mustProperty("DESCRIPTION"));
+		project.setDtCreated(new Date());
+		project.setParent((CatalogItem)propertyList.mustProperty("PARENT"));
+		
+		Optional<CatalogItem> hasCatalog = catalogItemRepository.findById(project.getId());
+
+		if(!hasCatalog.isEmpty()) {
+			throw new DuplicatedCatalogItemException("Projeto Id Duplicado:" + project.getId());
+		}
+		
+		CatalogItem savedProject = catalogItemRepository.save(project);
+		propertyList.addProperty("ENTITY", savedProject);
+		return propertyList;
+	}
+	
+	public List<Project> listAllProjects(){
+		List<Project> projects = projectRepository.findAll();
+		return projects;
+	}
+	
+	public Project findById(String id) {
+		Optional<Project> hasCatalog = projectRepository.findById(id);
+		
+		return hasCatalog.orElse(null);
+	}
 }

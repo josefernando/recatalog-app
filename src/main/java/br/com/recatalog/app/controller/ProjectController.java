@@ -26,7 +26,6 @@ import br.com.recatalog.app.Exception.GlobalExceptionController;
 import br.com.recatalog.app.Exception.ParentCatalogItemNotFoundException;
 import br.com.recatalog.app.model.domain.Project;
 import br.com.recatalog.app.service.ProjectService;
-import br.com.recatalog.app.service.ProjectService_New;
 import br.com.recatalog.app.util.BreadCrumbSession;
 import br.com.recatalog.util.PropertyList;
 
@@ -36,11 +35,11 @@ public class ProjectController {
 	
 	private Logger logger = LoggerFactory.getLogger(GlobalExceptionController.class);
 	
-	@Autowired
-	private ProjectService projectService;
+//	@Autowired
+//	private ProjectService projectService;
 	
 	@Autowired
-	private ProjectService_New projectService_new;
+	private ProjectService projectService;
 	
 	@Autowired
 	private BreadCrumbSession breadCrumbSession;
@@ -78,7 +77,7 @@ public class ProjectController {
 		propertyList.addProperty("PROJECT_DESC", description);
 
 //		projectService.createProject(propertyList);
-		projectService_new.createProject(propertyList);
+		projectService.createProject(propertyList);
 
 
 		if (propertyList.hasProperty("EXCEPTION")) {

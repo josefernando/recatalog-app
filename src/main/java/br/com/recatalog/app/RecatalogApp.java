@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import br.com.recatalog.app.domain.repository.CatalogItemRepository;
 //import br.com.recatalog.app.domain.repository.CatalogRepository;
@@ -22,6 +25,12 @@ import br.com.recatalog.app.userdetails.repository.CustomUserDetailsRepository;
 
 @SpringBootApplication
 public class RecatalogApp {
+	
+	@Bean
+	@LoadBalanced  // ref.: https://www.youtube.com/watch?v=GxLjcOE35oA&list=PLqq-6Pq4lTTZSKAFG6aCDVDP86Qx4lNas&index=21
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(RecatalogApp.class, args);
